@@ -1,9 +1,21 @@
 import React, {Component} from 'react';
-import {Text, View, FlatList, AsyncStorage, TextInput, Keyboard, Platform, ImageBackground, Dimensions} from 'react-native';
-import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
-import Header from './../Header'; 
+import {
+  Text, 
+  View, 
+  FlatList, 
+  AsyncStorage, 
+  Keyboard, 
+  Platform, 
+  ImageBackground, 
+  Dimensions,
+  
+} from 'react-native';
+import { MaterialCommunityIcons} from '@expo/vector-icons';
+import MedicinCard from '../common/MedicinCard'
+import Header from '../common/Header'; 
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import {Fumi} from 'react-native-textinput-effects';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const isAndroid = Platform.OS == "android";
 const viewPadding = 0;
@@ -45,47 +57,45 @@ export default class MyTreatments extends Component {
         if(notEmpty){
             this.setState( 
                 prevState => {
-                    let {tasks, text} = prevState;
+                    let {tasks, text, descriptions, description} = prevState;
 
                     return {
                         tasks: tasks.concat({key: tasks.length, text: text}),
                         text: "",
+                        description: "",
+                        descriptions: descriptions.concat({key: tasks.length, description: description })
                     };
                 },
-                () => Tasks.save(this.state.tasks)
+                () => Tasks.save(this.state.tasks, this.state.descriptions)
             );
         }
+
+        console.log(this.state.descriptions)
     };
-
-    addTaskTwo = () => {
-      let notEmpty = this.state.description.trim().length > 0;
-
-      if(notEmpty){
-          this.setState( 
-              prevState => {
-                  let {descriptions, description} = prevState;
-
-                  return {
-                      descriptions: descriptions.concat({key: descriptions.length, description: description}),
-                      description: "",
-                  };
-              },
-              () => Descriptions.save(this.state.descriptions)
-          );
-      }
-  };
 
 
     deleteTask = i => {
         this.setState( prevState => {
             let tasks = prevState.tasks.slice();
+            let descriptions = prevState.descriptions.slice();
             tasks.splice(i , 1);
-            return { tasks: tasks };
+            descriptions.splice(i,1)
+            return { tasks: tasks, descriptions: descriptions };
         },
 
-        () => Tasks.save(this.state.tasks)
+        () => Tasks.save(this.state.tasks, this.state.descriptions)
         )
     }
+    deleteTaskTwo = i => {
+      this.setState( prevState => {
+          let descriptions = prevState.descriptions.slice();
+          descriptions.splice(i , 1);
+          return { descriptions: descriptions };
+      },
+
+      () => Tasks.save(this.state.tasks, this.state.descriptions)
+      )
+  }
 
     componentDidMount() {
         Keyboard.addListener(
@@ -94,7 +104,9 @@ export default class MyTreatments extends Component {
         );
 
         Tasks.all(tasks => this.setState({tasks: tasks}))
-        Descriptions.all(descriptions => this.setState({descriptions: descriptions}))
+        Tasks.allTwo(descriptions => this.setState({descriptions:descriptions}))
+
+        console.log(this.state.descriptions)
     }
 
     renderHeader = () => {
@@ -104,10 +116,11 @@ export default class MyTreatments extends Component {
     toggleTextField = () => {
       this.setState({addMedecin: !this.state.addMedecin})
     }
-
   
 
     render(){
+      console.log(this.state)
+
         return (
             <View
             style={styles.container}>
@@ -115,7 +128,7 @@ export default class MyTreatments extends Component {
             <View style={{height:100}}>
             <Fumi
             onChangeText={this.changeTextHandler}
-            onSubmitEditing={this.addTask}
+            //onSubmitEditing={this.addTask}
             value={this.state.text}
             style={{height: 80}}
             labelHeight={24}
@@ -129,7 +142,7 @@ export default class MyTreatments extends Component {
           />
           <Fumi
             onChangeText={this.changeTextHandlerTwo}
-            onSubmitEditing={this.addTaskTwo}
+            //onSubmitEditing={this.addTaskTwo}
             value={this.state.description}
             style={{height: 80}}
             labelHeight={24}
@@ -141,24 +154,37 @@ export default class MyTreatments extends Component {
             iconWidth={40}
             inputPadding={16}
           />
-
-            </View>          
+          </View>    
+          <View style={{marginTop: 40,}}>
+          <TouchableOpacity style={{justifyContent:'center', alignItems:'center'}} onPress={this.addTask}>
+            <Text style={{color:'white', fontSize:19}}>LÄGG TILL</Text>
+          </TouchableOpacity>
+          </View> 
             <FlatList 
             ListHeaderComponent={() => <Header text={text}/>}
             style={styles.list}
             data={this.state.tasks}
             keyExtractor = { (item, index) => index.toString() }
             renderItem={({ item, index }) =>
-                <View>
-                  <View style={styles.listItemCont}>
-                    <Text style={styles.listItem}>
-                      {item.text}
-                      {/* {this.state.description || this.state.descriptions[index] !== undefined ? this.state.descriptions[index].description : null} */}
-                    </Text>
-                    <MaterialCommunityIcons onPress={() => this.deleteTask(index)} name="delete-circle" size={32} color="#ff5964" style={{marginRight:20}} />
-                  </View>
-                  <View style={styles.hr} />
-                </View>}
+
+            <View style={{alignItems:'center', justifyContent:'center'}}>
+             <MedicinCard 
+             medicin={item.text}
+            description={this.state.descriptions[index] ? this.state.descriptions[index].description : 'No description'}
+             />
+            </View>
+                // <View>
+                //   <View style={styles.listItemCont}>
+                //     <Text style={styles.listItem}>
+                //       {item.text}
+                //       {this.state.descriptions[index] ? this.state.descriptions[index].description : 'No description'}
+                //     </Text>
+                //     <MaterialCommunityIcons onPress={() => this.deleteTask(index)} name="delete-circle" size={32} color="#ff5964" style={{marginRight:20}} />
+                //   </View>
+                //   <View style={styles.hr} />
+
+                // </View>
+                }
             />
             </ImageBackground>
           </View>
@@ -176,46 +202,36 @@ let Tasks = {
         tasks ? tasks.split("||").map((task, i) => ({ key: i, text: task })) : []
       );
     },
+    convertToArrayOfObjectTwo(descriptions, callback) {
+      return callback(
+        descriptions ? descriptions.split("||").map((description, i) => ({ key: i, description: description })) : []
+      );
+    },
     convertToStringWithSeparators(tasks) {
       return tasks.map(task => task.text).join("||");
+    },
+    convertToStringWithSeparatorsTwo(descriptions) {
+      return descriptions.map(description => description.description).join("||");
     },
     all(callback) {
       return AsyncStorage.getItem("TASKS", (err, tasks) =>
         this.convertToArrayOfObject(tasks, callback)
       );
     },
-    save(tasks) {
-      AsyncStorage.setItem("TASKS", this.convertToStringWithSeparators(tasks));
+    allTwo(callback) {
+      return AsyncStorage.getItem("DESCRIPTIONS", (err, descriptions) =>
+        this.convertToArrayOfObjectTwo(descriptions, callback)
+      );
+    },
+    save(tasks, descriptions ) {
+      AsyncStorage.multiSet([
+        ["TASKS", this.convertToStringWithSeparators(tasks)], 
+        ["DESCRIPTIONS",this.convertToStringWithSeparatorsTwo(descriptions)]
+      ]);
     }
   };
 
 
-  let Descriptions = {
-    convertToArrayOfObject(descriptions, callback) {
-      return callback(
-        descriptions ? descriptions.split("||").map((description, i) => ({ key: i, description: description })) : []
-      );
-    },
-    convertToStringWithSeparators(descriptions) {
-      return descriptions.map(description => description.description).join("||");
-    },
-    all(callback) {
-      try {
-        return AsyncStorage.getItem("DESCRIPTIONS", (err, descriptions) =>
-        this.convertToArrayOfObject(descriptions, callback)
-      );
-      } catch (error) {
-        alert('AsyncStorage error: ' + error.message);
-      }
-    },
-    save(descriptions) {
-      try {
-        AsyncStorage.setItem("DESCRIPTIONS", this.convertToStringWithSeparators(descriptions));
-      } catch (error) {
-        alert('AsyncStorage error: ' + error.message);
-      }
-    }
-  };
 
 
 const styles = {
@@ -293,10 +309,6 @@ const styles = {
     
     : <MaterialIcons onPress={this.toggleTextField} name="add-circle" size={72} color="#5bc9ff" />
     }
-
-
-
     </View> */
   }
   
-

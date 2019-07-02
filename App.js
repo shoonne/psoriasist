@@ -8,14 +8,14 @@ import GradientButton from 'react-native-gradient-buttons';
 import MyTreatments from './components/src/screens/MyTreatments'
 import SkinAndNailSelfie from './components/src/screens/SkinAndNailSelfie'
 import Psoriasis from './components/src/screens/Psoriasis'
-import Appointments from './components/src/screens/Appointments';
+// import Appointments from './components/src/screens/Appointments';
 import Sqltest from './components/src/screens/Sqltest';
 
-import MyCarousell from './components/src/MyCarousell';
-import Header from './components/src/Header';
+import MyCarousell from './components/src/common/MyCarousell';
+import Header from './components/src/common/Header';
 
 
-
+// Navigation
 import { createAppContainer, createStackNavigator } from 'react-navigation'; // Version can be specified in package.json
 
 
@@ -31,7 +31,7 @@ class HomeScreen extends React.Component {
   static navigationOptions = {
     title: 'Hem',
     headerStyle: {
-      backgroundColor: '#ff5964',
+      backgroundColor: '#5bc9ff',
     },
   };
   constructor(props){
@@ -49,13 +49,8 @@ class HomeScreen extends React.Component {
 
     });
   }
-
-
-
-
-
   render() {
-    console.log(this.props);
+    //console.log(this.props);
 
     return (
 

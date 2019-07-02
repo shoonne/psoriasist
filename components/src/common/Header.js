@@ -28,7 +28,7 @@ class  Header extends Component {
     return(
       <View style={{ flexDirection:'row', width: '95%', }}>
 
-      <Image source={require('./../../assets/logo.png')} style={{width: 70, height: 70, marginTop: 40, borderWidth:0.6, borderColor:'white', borderRadius:35, marginLeft: 10}}/>
+      <Image source={require('./../../../assets/logo.png')} style={{width: 70, height: 70, marginTop: 40, borderWidth:0.6, borderColor:'white', borderRadius:35, marginLeft: 10}}/>
       <Animated.View style={[styles.text,{opacity: fadeAnim,}]}>
       <Text style={{ paddingTop: 8, margin: 15, color:'white',}}>{this.props.text}</Text>
       </Animated.View>
@@ -59,33 +59,3 @@ const styles = {
 
 
 export default Header;
-
-
-
-    // <View style={styles.header}>
-    // <Image source={require('./../../assets/logo.png')} style={{width: 70, height: 70, paddingTop: 90}}/>
-    // <View style={styles.textContainer}>
-    // <Text style={{ paddingTop: 8, margin: 15, color:'white',}}>{props.text}</Text>
-    // </View>
-    // </View>
-
-    // const styles = {
-    //   header : {
-    //     width: deviceWidth, 
-    //     height: 200, 
-    //     // borderBottomWidth: 2.6, 
-    //     // borderLeftWidth: 0.6,
-    //     // borderRightWidth: 0.6,
-    //     borderBottomRightRadius: 50,
-    //     borderBottomLeftRadius: 50, 
-    //   },
-    //   textContainer: {
-    //       marginLeft: deviceWidth * 0.25,  
-    //       marginRight: 15,
-    //       borderWidth: 0.5,
-    //       borderColor: 'white',
-    //       borderTopRightRadius: 15,
-    //       borderBottomLeftRadius: 15,
-    //       borderBottomRightRadius: 15,
-    //       backgroundColor:'#189ff2'}
-    // }

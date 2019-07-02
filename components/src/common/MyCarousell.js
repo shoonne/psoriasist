@@ -13,11 +13,31 @@ const CAROUSELL_DATA = [
 
     },
     {
+        title:'Läkemedelsverket',
+        subtitle:'Psoriasis och Psoriasisatrit',
+        illustration:'https://lakemedelsverket.se/Templates/public/images/share-badge1.jpg',
+        url: 'https://lakemedelsverket.se/psoriasis'
+    },
+    {
         title: 'Psoriasisförbundet',
         subtitle: 'Om Psoriasis',
         resizeMode: true,
         illustration: 'http://resources.mynewsdesk.com/image/upload/t_open_graph_image/jwilvkkevqlmfwyjlffn.jpg',
         url:'https://www.psoriasisforbundet.se/fakta-o-rad/om-psoriasis/'
+    }, 
+    {
+        title: 'netdoktor pro',
+        subtitle: 'Psoriasis',
+        resizeMode: true,
+        illustration: 'http://www.netdoktorpro.se/assets/Uploads/netdoktorpro-share.png',
+        url:'https://www.netdoktorpro.se/hud-venereologi/medicinska-oversikter/psoriasis/'
+    }, 
+    {
+        title: 'Doktorn.se',
+        subtitle: 'Om Psoriasis',
+        resizeMode: true,
+        illustration: 'https://doktornpunktcom.files.wordpress.com/2017/09/doktorncom_transparent_logga.png?w=1020&h=233',
+        url:'https://www.doktorn.com/artikel/psoriasis-mer-%C3%A4n-en-hudsjukdom',
     },
 ];
 

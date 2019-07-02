@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, ImageBackground, ScrollView, Dimensions } from 'react-native';
-import Header from './../Header';
-import TextBox from './../TextBox';
+import Header from '../common/Header';
+import TextBox from '../common/TextBox';
 
-let deviceWidth = Dimensions.get('window').width;
+// let deviceWidth = Dimensions.get('window').width;
 
 const DATA = [
   {
