@@ -3,23 +3,7 @@ import {Text, View, FlatList, AsyncStorage, TextInput, Keyboard, Platform, Image
 import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import Header from './../Header'; 
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
-
-
-
-
-import {
-  Kaede,
-  Hoshi,
-  Jiro,
-  Isao,
-  Madoka,
-  Akira,
-  Hideo,
-  Kohana,
-  Makiko,
-  Sae,
-  Fumi,
-} from 'react-native-textinput-effects';
+import {Fumi} from 'react-native-textinput-effects';
 
 const isAndroid = Platform.OS == "android";
 const viewPadding = 0;
@@ -35,7 +19,6 @@ export default class MyTreatments extends Component {
       color:'white'
     },
   };
-
     state = {
         tasks:[],
         text: "",
@@ -129,11 +112,6 @@ export default class MyTreatments extends Component {
             <View
             style={styles.container}>
             <ImageBackground source={require('./../../../assets/background/clearblue.png')} style={{width: '100%', height: '100%'}}>
-
-            {/* <View style={{width: deviceWidth, height: 170}}>
-              <Text style={{marginLeft: deviceWidth * 0.25, marginTop: 30, marginRight: 10, color:'white', backgroundColor:'#189ff2', padding:8}}>Det är tidskrävande att ha psoriasis - tid som kanske inte finns... Man mår dock ofta bättre om man tar hand om sig. 
-              Några kan till och med vara besvärsfria ett tag.</Text>
-            </View> */}
             <View style={{height:100}}>
             <Fumi
             onChangeText={this.changeTextHandler}
