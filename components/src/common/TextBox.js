@@ -21,7 +21,7 @@ const styles = {
         
     },
     textContainer: {
-        backgroundColor:'white', borderRadius: 5,  width: deviceWidth * 0.95, borderWidth: 0.5, borderColor: 'black',
+        backgroundColor:'white', borderRadius: 5,  width: deviceWidth * 0.95, borderColor: 'black',
     },
     text: {
         margin: 20, fontSize: 20, fontFamily:'raleway-light',

@@ -66,7 +66,7 @@ class HomeScreen extends React.Component {
           <View style={{flexDirection:'row', alignItems:'center', justifyContent:'center', paddingTop: 20}}>
           
           <GradientButton
-            style={{ marginVertical: 8, borderWidth: 0 , borderRadius: 12, borderColor:'#FF5964' }}
+            style={styles.btn1}
             text="MIN BEHANDLING"
             textStyle={{ fontSize: 14, color:'white' }}
             gradientBegin="#51E5FF"
@@ -81,7 +81,7 @@ class HomeScreen extends React.Component {
           />
 
           <GradientButton
-            style={{ marginVertical: 8,  borderWidth: 0 , borderRadius: 12, borderColor:'#FF5964'  }}
+            style={styles.btn2}
             text="HUD OCH NAGELBILDER"
             textStyle={{ fontSize: 12 }}
             gradientBegin="#EFBCD5"
@@ -100,7 +100,7 @@ class HomeScreen extends React.Component {
           <View style={{flexDirection:'row', alignItems:'center', justifyContent:'center', paddingTop: 20}}>
 
         <GradientButton
-            style={{ marginVertical: 8,  borderWidth: 0 , borderRadius: 12, borderColor:'#FF5964'  }}
+            style={styles.btn3}
             text="LÄKARBESÖK"
             textStyle={{ fontSize: 14 }}
             gradientBegin="#59CD90"
@@ -114,7 +114,7 @@ class HomeScreen extends React.Component {
           />
 
         <GradientButton
-            style={{ marginVertical: 8,  borderWidth: 0 , borderRadius: 12, borderColor:'#FF5964'  }}
+            style={styles.btn4}
             text="VAD ÄR PSORIASIS?"
             textStyle={{ fontSize: 14 }}
             gradientBegin="#ff4b1f"
@@ -128,10 +128,13 @@ class HomeScreen extends React.Component {
           />
           </View>
 
+          {/* CAROUSELL */}
           <View style={{paddingTop: 20}}>
-          <Text style={{textAlign:'center', padding: 20}}>För mer information</Text>
-           <MyCarousell/>
+            <Text style={{textAlign:'center', padding: 20}}>För mer information</Text>
+            <MyCarousell/>
           </View>
+
+
         </ScrollView>
         </ImageBackground>
       </View>
@@ -174,6 +177,65 @@ const AppContainer = createAppContainer(RootStack);
 export default class App extends React.Component {
   render() {
     return <AppContainer />;
+  }
+}
+
+const styles = {
+  btn1: {
+    marginVertical: 8, 
+    borderWidth: 0 , 
+    borderRadius: 12, 
+    borderColor:'#FF5964',
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 7,
+    },
+    shadowOpacity: 0.41,
+    shadowRadius: 9.11,
+    elevation: 14,
+  },
+  btn2: {
+    marginVertical: 8,  
+    borderWidth: 0 , 
+    borderRadius: 12, 
+    borderColor:'#FF5964',
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 7,
+    },
+    shadowOpacity: 0.41,
+    shadowRadius: 9.11,
+    elevation: 14,
+  },
+  btn3: {
+    marginVertical: 8,  
+    borderWidth: 0 , 
+    borderRadius: 12, 
+    borderColor:'#FF5964',
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 7,
+    },
+    shadowOpacity: 0.41,
+    shadowRadius: 9.11,
+    elevation: 14,
+  }, 
+  btn4: {
+    marginVertical: 8,  
+    borderWidth: 0 , 
+    borderRadius: 12, 
+    borderColor:'#FF5964',
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 7,
+    },
+    shadowOpacity: 0.41,
+    shadowRadius: 9.11,
+    elevation: 14,
   }
 }
 

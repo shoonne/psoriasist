@@ -23,11 +23,20 @@ const styles = {
     container : {
         flexDirection:'row',
         backgroundColor:'#5bc9ff', 
-        height: 150, width: 
-        deviceWidth * 0.95, 
+        height: 150, 
+        width: deviceWidth * 0.95, 
         borderWidth:0.6, 
         borderColor:'white', 
-        marginBottom: 10 
+        marginBottom: 10 ,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 7,
+        },
+        shadowOpacity: 0.41,
+        shadowRadius: 9.11,
+
+elevation: 14,
     },
     medicinText: {
         padding: 10, fontWeight:'bold', fontSize: 48, color:'white'

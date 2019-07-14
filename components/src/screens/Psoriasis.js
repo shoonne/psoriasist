@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ImageBackground, ScrollView, Dimensions } from 'react-native';
+import { View, ImageBackground, ScrollView, Dimensions, Image } from 'react-native';
 import Header from '../common/Header';
 import TextBox from '../common/TextBox';
 
@@ -62,9 +62,16 @@ class Psoriasis extends React.Component {
     render() {
       return (
         <View>
-        <ImageBackground source={require('./../../../assets/background/cleanred.png')} style={{width: '100%', height: '100%'}}>
         <ScrollView contentContainerStyle={{justifyContent:'center', alignItems:'center'}}>
         <Header text={'Här kan du läsa fakta om Psoriasis och dess olika former samt hur du kan behandla det själv.'}/>
+        <View style={{flex:1 , width: '100%', }}>
+        <Image 
+        style={{ flex: 1,
+                width: '100%',
+                height: 350,
+                resizeMode: 'contain'}}
+        source={{uri: 'https://www.adwdiabetes.com/articles/wp-content/uploads/2016/05/The-Histopathology-of-Psoriasis-Featured-Image.jpg'}}/>
+        </View>
         <TextBox header={'Vad är Psoriasis?'} text={DATA[0].text}/>
         <TextBox header={DATA[1].title} text={DATA[1].text}/>
         <TextBox header={DATA[1].plackpsoriasis.title} text={DATA[1].plackpsoriasis.text}/>
@@ -78,7 +85,6 @@ class Psoriasis extends React.Component {
           )
         })}
         </ScrollView>
-        </ImageBackground>
         </View>
       );
     }
