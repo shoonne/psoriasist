@@ -52,6 +52,7 @@ export default class MyTreatments extends Component {
   };
 
     addTask = () => {
+
         let notEmpty = this.state.text.trim().length > 0;
 
         if(notEmpty){
@@ -169,6 +170,7 @@ export default class MyTreatments extends Component {
 
             <View style={{alignItems:'center', justifyContent:'center'}}>
              <MedicinCard 
+             deleteTask={() => this.deleteTask(index)}
              medicin={item.text}
             description={this.state.descriptions[index] ? this.state.descriptions[index].description : 'No description'}
              />
