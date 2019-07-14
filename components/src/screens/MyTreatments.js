@@ -10,7 +10,6 @@ import {
   Dimensions,
   
 } from 'react-native';
-import { MaterialCommunityIcons} from '@expo/vector-icons';
 import MedicinCard from '../common/MedicinCard'
 import Header from '../common/Header'; 
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
@@ -87,16 +86,6 @@ export default class MyTreatments extends Component {
         () => Tasks.save(this.state.tasks, this.state.descriptions)
         )
     }
-    deleteTaskTwo = i => {
-      this.setState( prevState => {
-          let descriptions = prevState.descriptions.slice();
-          descriptions.splice(i , 1);
-          return { descriptions: descriptions };
-      },
-
-      () => Tasks.save(this.state.tasks, this.state.descriptions)
-      )
-  }
 
     componentDidMount() {
         Keyboard.addListener(
@@ -107,7 +96,7 @@ export default class MyTreatments extends Component {
         Tasks.all(tasks => this.setState({tasks: tasks}))
         Tasks.allTwo(descriptions => this.setState({descriptions:descriptions}))
 
-        console.log(this.state.descriptions)
+        //console.log(this.state.descriptions)
     }
 
     renderHeader = () => {
@@ -120,7 +109,7 @@ export default class MyTreatments extends Component {
   
 
     render(){
-      console.log(this.state)
+      //console.log(this.state)
 
         return (
             <View
@@ -175,18 +164,7 @@ export default class MyTreatments extends Component {
             description={this.state.descriptions[index] ? this.state.descriptions[index].description : 'No description'}
              />
             </View>
-                // <View>
-                //   <View style={styles.listItemCont}>
-                //     <Text style={styles.listItem}>
-                //       {item.text}
-                //       {this.state.descriptions[index] ? this.state.descriptions[index].description : 'No description'}
-                //     </Text>
-                //     <MaterialCommunityIcons onPress={() => this.deleteTask(index)} name="delete-circle" size={32} color="#ff5964" style={{marginRight:20}} />
-                //   </View>
-                //   <View style={styles.hr} />
-
-                // </View>
-                }
+            }
             />
             </ImageBackground>
           </View>
@@ -312,5 +290,18 @@ const styles = {
     : <MaterialIcons onPress={this.toggleTextField} name="add-circle" size={72} color="#5bc9ff" />
     }
     </View> */
+
+    // OLD MEDICIN CARD
+                    // <View>
+                //   <View style={styles.listItemCont}>
+                //     <Text style={styles.listItem}>
+                //       {item.text}
+                //       {this.state.descriptions[index] ? this.state.descriptions[index].description : 'No description'}
+                //     </Text>
+                //     <MaterialCommunityIcons onPress={() => this.deleteTask(index)} name="delete-circle" size={32} color="#ff5964" style={{marginRight:20}} />
+                //   </View>
+                //   <View style={styles.hr} />
+
+                // </View>
   }
   

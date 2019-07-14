@@ -8,8 +8,9 @@ import GradientButton from 'react-native-gradient-buttons';
 import MyTreatments from './components/src/screens/MyTreatments'
 import SkinAndNailSelfie from './components/src/screens/SkinAndNailSelfie'
 import Psoriasis from './components/src/screens/Psoriasis'
-// import Appointments from './components/src/screens/Appointments';
+import Appointments from './components/src/screens/Appointments';
 import Sqltest from './components/src/screens/Sqltest';
+import DoctorNotesTest from './components/src/screens/DoctorNoteTest';
 
 import MyCarousell from './components/src/common/MyCarousell';
 import Header from './components/src/common/Header';
@@ -110,7 +111,7 @@ class HomeScreen extends React.Component {
             width={deviceWidth * 0.45}
             radius={10}
         
-            onPressAction={() => this.props.navigation.navigate('Sqltest')}
+            onPressAction={() => this.props.navigation.navigate('DoctorNotesTest')}
           />
 
         <GradientButton
@@ -157,8 +158,8 @@ const RootStack = createStackNavigator(
     MyTreatments: {
       screen: MyTreatments,
     },
-    Sqltest:{
-      screen: Sqltest
+    DoctorNotesTest:{
+      screen: DoctorNotesTest,
     },
     SkinAndNailSelfie:{
       screen: SkinAndNailSelfie
