@@ -16,13 +16,17 @@ import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import {Fumi} from 'react-native-textinput-effects';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
+// Redux
+import {connect} from 'react-redux'; 
+import {changeMedicinText} from './../../../actions';
+
 const isAndroid = Platform.OS == "android";
 const viewPadding = 0;
 let deviceWidth = Dimensions.get('window').width;
 let deviceHeight = Dimensions.get('window').height;
 let text = 'Det är tidskrävande att ha psoriasis. Man mår dock ofta bättre om man tar hand om sig och håller reda på sina behandlingar. Några kan till och med vara besvärsfria ett tag.';
 
-export default class MyTreatments extends Component {
+class MyTreatments extends Component {
   static navigationOptions = {
     title: 'Min behandling',
     headerStyle: {
@@ -271,6 +275,15 @@ const styles = {
       borderColor: '#ff5964',
     }
   };
+
+  // matStateToProps takes in the state and returns an object
+function mapStateToProps(state) {
+  return {
+      text: state.text,
+  };
+}
+
+  export default connect(mapStateToProps,{changeMedicinText})(MyTreatments);
 
 
       {

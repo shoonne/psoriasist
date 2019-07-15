@@ -22,6 +22,8 @@
     "react-native-textinput-effects": "^0.5.1",
     "react-native-web": "^0.11.4",
     "react-navigation": "^3.11.0",
+    "react-redux": "^7.1.0",
+    "redux": "^4.0.4",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
