@@ -12,7 +12,7 @@ const MedicinCard = (props) => (
         </View>
         
         <View style={{paddingTop: 50, paddingLeft: 80}} >
-        <MaterialCommunityIcons onPress={props.deleteTask} name="delete-circle" size={45} color="white" style={{}} />
+        <MaterialCommunityIcons onPress={props.deleteTask} name="delete-circle" size={45} color="white" />
         </View>
     </View>
 );
@@ -39,7 +39,7 @@ const styles = {
 elevation: 14,
     },
     medicinText: {
-        padding: 10, fontWeight:'bold', fontSize: 48, color:'white'
+        padding: 10, fontWeight:'bold', fontSize: 18, color:'white'
     },
     descriptionText: {
         padding: 10,fontSize: 16, color:'white'
