@@ -4,10 +4,9 @@ import { Font } from 'expo';
 // Components
 import GradientButton from 'react-native-gradient-buttons';
 import MyTreatments from './components/src/screens/MyTreatments'
-import SkinAndNailSelfie from './components/src/screens/SkinAndNailSelfie'
+import SkinAndNailSelfieV2 from './components/src/screens/SkinAndNailSelfieV2';
 import Psoriasis from './components/src/screens/Psoriasis'
 import Appointments from './components/src/screens/Appointments';
-import Sqltest from './components/src/screens/Sqltest';
 import DoctorNotesTest from './components/src/screens/DoctorNoteTest';
 import MyCarousell from './components/src/common/MyCarousell';
 import Header from './components/src/common/Header';
@@ -165,7 +164,7 @@ const RootStack = createStackNavigator(
       screen: DoctorNotesTest,
     },
     SkinAndNailSelfie:{
-      screen: SkinAndNailSelfie
+      screen: SkinAndNailSelfieV2
     },
     Psoriasis:{
       screen: Psoriasis

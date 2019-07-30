@@ -107,9 +107,6 @@ class MyTreatments extends Component {
       return <Header text={text}/>
     }
 
-    toggleTextField = () => {
-      this.setState({addMedecin: !this.state.addMedecin})
-    }
   
 
     render(){

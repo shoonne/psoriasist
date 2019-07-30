@@ -1,6 +1,5 @@
 import React from 'react';
 import { 
-    FlatList,
     View,
     Platform,
     Keyboard, 
@@ -8,19 +7,11 @@ import {
     Dimensions,
     Text
 } from 'react-native';
-import {Fumi, Sae} from 'react-native-textinput-effects';
-import GradientButton from 'react-native-gradient-buttons';
-
-import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
-import MedicinCard from './../common/MedicinCard'
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 
 const isAndroid = Platform.OS == "android";
 const viewPadding = 0;
 let deviceWidth = Dimensions.get('window').width;
-
- 
-
 
 export default class DoctorNotesTest extends React.Component {
     constructor(props) {
@@ -88,11 +79,7 @@ export default class DoctorNotesTest extends React.Component {
         return (<Text>hej</Text>)
       })
     }
-
     
-    
-    
-
     render(){
               {/* TODO: STYLE THE NOTES AND THE TEXTINPUT */}
 
@@ -121,60 +108,6 @@ export default class DoctorNotesTest extends React.Component {
         })}
 
         </View>
-
-
-
-
-
-
-
-            {/* <View style={{marginTop: 100}}>
-                <Sae
-                onChangeText={this.changeTextHandler}
-                label={'Anteckningar'}
-                iconClass={FontAwesomeIcon}
-                iconName={'pencil'}
-                style={{height: 100}}
-                iconColor={'black'}
-                labelStyle={{height: 40}}
-                inputPadding={40}
-                inputStyle={{color: 'black', fontSize: 26}}
-                multiline={true}
-                labelHeight={24}
-                // active border height
-                borderHeight={1}
-                // TextInput props
-                autoCapitalize={'none'}
-                autoCorrect={false}
-            />
-          <GradientButton
-            text="LÄGG TILL"
-            textStyle={{ fontSize: 14 }}
-            gradientBegin="#ff4b1f"
-            gradientEnd="#ff9068"
-            gradientDirection="diagonal"
-            height={isAndroid ? 100 : 80}
-            width={deviceWidth * 0.95}
-            radius={0}
-
-            onPressAction={this.addNote}
-          />
-            </View>
-
-            <FlatList 
-            data={this.state.notes}
-            keyExtractor = { (item, index) => index.toString() }
-            renderItem={({ item, index }) =>
-
-            <View style={{flex: 1,alignItems:'center', justifyContent:'center', height: 200}}>
-             <MedicinCard 
-             deleteTask={() => this.deleteNote(index)}
-             medicin={item.text}
-             />
-            </View>
-            }
-            /> */}
-
         </View>
 
         )
@@ -201,7 +134,3 @@ let Notes = {
         AsyncStorage.setItem("NOTES", this.convertToStringWithSeparators(notes));
     }
   };
-
-const styles = {
-
-}

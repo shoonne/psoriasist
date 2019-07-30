@@ -93,23 +93,3 @@ class Psoriasis extends React.Component {
   export default Psoriasis;
 
 
-  // <Text style={{fontSize: 40, fontFamily:'raleway-light'}}>Vad är Psoriasis?</Text>
-  //       <View style={{flex: 1,backgroundColor:'white', borderRadius: 5,  width: deviceWidth * 0.95, borderWidth: 0.5, borderColor: 'black',  }}>
-  //         <Text style={{margin: 20, fontSize: 20, fontFamily:'raleway-light' }}>
-  //         Psoriasis är en kronisk sjukdom som oftast ger utslag på huden. Orsaken är en alltför snabb tillväxt av hudceller och en inflammation i huden. Utslagen kan försvinna i långa perioder med hjälp av olika behandlingar. Psoriasis smittar inte.
-  //         </Text>
-  //         <Text style={{margin: 20, fontSize: 20, fontFamily:'raleway-light'  }}>Psoriasis kommer ofta i så kallade skov. Det innebär perioder med små eller inga besvär och perioder med mer besvär och större utslag.</Text>
-  //       </View>
-
-  //       <Text style={{paddingTop:40,fontSize: 40, fontFamily:'raleway-light'}}>Psoriasis i Sverige</Text>
-  //       <View style={{flex: 1, marginTop: 10,backgroundColor:'white', borderRadius: 5,  width: deviceWidth * 0.95, borderWidth: 0.5, borderColor: 'black' }}>
-  //         <Text style={{margin: 20, fontSize: 18, fontFamily:'raleway-light',  }}>
-  //         I Sverige beräknas att cirka 250 000 till 300 000 individer har psoriasis. 
-  //         Det gör den till en av våra vanligaste folksjukdomar, en sjukdom som ibland kan innebära ett stort lidande för den enskilde individen. 
-  //         </Text>
-  //         <Text style={{margin: 20, fontSize: 18, fontFamily:'raleway-light',  }}>Trots att så många har sjukdomen finns ett stort kunskapsglapp både hos gemene man och inom vården. Föråldrade föreställningar tenderar att hänga kvar, exempelvis att det är en form av hudutslag/hudsjukdom eller att den är smittsam.
-  //         </Text>
-  //         <Text style={{margin: 20, fontSize: 18, fontFamily:'raleway-light',  }}>
-  //         För människor med psoriasis innebär det att kroppens immunsystem inte fungerar som det ska göra. En del människor utvecklar ett immunförsvar som reagerar mot och går till angrepp mot den egna vävnaden, reaktionen är att vävnaden inflammeras.
-  //         </Text>
-  //     </View>
