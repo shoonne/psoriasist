@@ -8,8 +8,14 @@ import {
   Platform, 
   ImageBackground, 
   Dimensions,
+  Modal,
+  Alert
   
 } from 'react-native';
+import { ListItem } from 'react-native-elements'
+import TouchableScale from 'react-native-touchable-scale'; // https://github.com/kohver/react-native-touchable-scale
+
+
 import MedicinCard from '../common/MedicinCard'
 import Header from '../common/Header'; 
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
@@ -39,7 +45,8 @@ class MyTreatments extends Component {
         text: "",
         descriptions:[],
         description: "",
-        addMedecin: false
+        addMedecin: false,
+        modalVisible:false,
     };
 
     changeTextHandler = text => {
@@ -61,13 +68,14 @@ class MyTreatments extends Component {
         if(notEmpty){
             this.setState( 
                 prevState => {
-                    let {tasks, text, descriptions, description} = prevState;
+                    let {tasks, text, descriptions, description, modalVisible} = prevState;
 
                     return {
                         tasks: tasks.concat({key: tasks.length, text: text}),
                         text: "",
                         description: "",
-                        descriptions: descriptions.concat({key: tasks.length, description: description })
+                        descriptions: descriptions.concat({key: tasks.length, description: description }),
+                        modalVisible: !modalVisible
                     };
                 },
                 () => Tasks.save(this.state.tasks, this.state.descriptions)
@@ -76,6 +84,10 @@ class MyTreatments extends Component {
 
         console.log(this.state.descriptions)
     };
+
+    setModalVisible(visible) {
+      this.setState({modalVisible: visible});
+    }
 
 
     deleteTask = i => {
@@ -116,57 +128,108 @@ class MyTreatments extends Component {
             <View
             style={styles.container}>
             <ImageBackground source={require('./../../../assets/background/clearblue.png')} style={{width: '100%', height: '100%'}}>
-            <View style={{height:100}}>
-            <Fumi
-            onChangeText={this.changeTextHandler}
-            //onSubmitEditing={this.addTask}
-            value={this.state.text}
-            style={{height: 80}}
-            labelHeight={24}
-            label={'Lägg till medecin'}
-            iconClass={FontAwesomeIcon}
-            iconName={'medkit'}
-            iconColor={'#5bc9ff'}
-            iconSize={20}
-            iconWidth={40}
-            inputPadding={16}
-          />
-          <Fumi
-            onChangeText={this.changeTextHandlerTwo}
-            //onSubmitEditing={this.addTaskTwo}
-            value={this.state.description}
-            style={{height: 80}}
-            labelHeight={24}
-            label={'Lägg till beskrivning'}
-            iconClass={FontAwesomeIcon}
-            iconName={'pencil'}
-            iconColor={'#5bc9ff'}
-            iconSize={20}
-            iconWidth={40}
-            inputPadding={16}
-          />
-          </View>    
-          <View style={{marginTop: 40,}}>
-          <TouchableOpacity style={{justifyContent:'center', alignItems:'center'}} onPress={this.addTask}>
-            <Text style={{color:'white', fontSize:19}}>LÄGG TILL</Text>
-          </TouchableOpacity>
-          </View> 
-            <FlatList 
-            ListHeaderComponent={() => <Header text={text}/>}
-            style={styles.list}
-            data={this.state.tasks}
-            keyExtractor = { (item, index) => index.toString() }
-            renderItem={({ item, index }) =>
+              <FlatList 
+              ListHeaderComponent={() => <Header text={text}/>}
+              style={styles.list}
+              data={this.state.tasks}
+              keyExtractor = { (item, index) => index.toString() }
+              renderItem={({ item, index }) =>
+                  <ListItem
+                  onLongPress={ () => Alert.alert(
+                        'Alert Title',
+                        'My Alert Msg',
+                        [
+                          {text: 'Delete', onPress: () => this.deleteTask(index)},
+                          {
+                            text: 'Cancel',
+                            onPress: () => console.log('Cancel Pressed'),
+                            style: 'cancel',
+                          },
+                          {text: 'OK', onPress: () => console.log('OK Pressed')},
+                        ],
+                        {cancelable: false},
+                      )}
+                  Component={TouchableScale}
+                  friction={90} //
+                  tension={100} // These props are passed to the parent component (here TouchableScale)
+                  activeScale={0.95} //
+                  linearGradientProps={{
+                    colors: ['#FF9800', '#F44336'],
+                    start: [1, 0],
+                    end: [0.2, 0],
+                  }}
+                  //ViewComponent={LinearGradient} // Only if no expo
+                  // leftAvatar={{ rounded: true, source: { uri: avatar_url } }}
+                  title={item.text}
+                  titleStyle={{ color: 'white', fontWeight: 'bold' }}
+                  subtitleStyle={{ color: 'white' }}
+                  subtitle={this.state.descriptions[index] ? this.state.descriptions[index].description : 'No description'}
+                  chevronColor="white"
+                  chevron/>}
+              />
+              
+            <Modal
+              animationType="slide"
+              transparent={false}
+              visible={this.state.modalVisible}
+              onRequestClose={() => {
+                Alert.alert('Modal has been closed.');
+              }}>
+                <View >
 
-            <View style={{alignItems:'center', justifyContent:'center'}}>
-             <MedicinCard 
-             deleteTask={() => this.deleteTask(index)}
-             medicin={item.text}
-            description={this.state.descriptions[index] ? this.state.descriptions[index].description : 'No description'}
-             />
-            </View>
-            }
-            />
+                <View style={{height:100, marginTop: 100}}>
+                    <Fumi
+                    onChangeText={this.changeTextHandler}
+                    //onSubmitEditing={this.addTask}
+                    value={this.state.text}
+                    style={{height: 80}}
+                    labelHeight={24}
+                    label={'Lägg till medecin'}
+                    iconClass={FontAwesomeIcon}
+                    iconName={'medkit'}
+                    iconColor={'#5bc9ff'}
+                    iconSize={20}
+                    iconWidth={40}
+                    inputPadding={16}
+                  />
+                    <Fumi
+                      onChangeText={this.changeTextHandlerTwo}
+                      //onSubmitEditing={this.addTaskTwo}
+                      value={this.state.description}
+                      style={{height: 80}}
+                      labelHeight={24}
+                      label={'Lägg till beskrivning'}
+                      iconClass={FontAwesomeIcon}
+                      iconName={'pencil'}
+                      iconColor={'#5bc9ff'}
+                      iconSize={20}
+                      iconWidth={40}
+                      inputPadding={16}
+                    />
+                  </View>  
+
+                    <View style={{marginTop: 40,}}>
+                      <TouchableOpacity style={{justifyContent:'center', alignItems:'center'}} onPress={this.addTask}>
+                        <Text style={{color:'black', fontSize:19}}>LÄGG TILL</Text>
+                      </TouchableOpacity>
+                    </View>
+
+                    <TouchableOpacity
+                        onPress={() => {
+                          this.setModalVisible(!this.state.modalVisible);
+                        }}>
+                        <Text>Hide Modal</Text>
+                    </TouchableOpacity>
+
+
+                 </View>
+             </Modal>
+
+            <TouchableOpacity 
+            onPress={() => {this.setModalVisible(true);}}
+            style={{justifyContent:'center', alignItems:'center', borderWidth:0.5, backgroundColor:'#FF9800', marginBottom:80}}>
+            <Text style={{fontSize: 50, color:'white'}}>+</Text>
+            </TouchableOpacity>
             </ImageBackground>
           </View>
         );
@@ -283,35 +346,4 @@ function mapStateToProps(state) {
   export default connect(mapStateToProps,{changeMedicinText})(MyTreatments);
 
 
-      {
-      // OLD TEXTINPUT
-    /* <View style={styles.textInputContainer}>
-    {this.state.addMedecin ?             
-    <TextInput
-      style={styles.textInput}
-      onChangeText={this.changeTextHandler}
-      onSubmitEditing={this.addTask}
-      value={this.state.text}
-      placeholder="Namn på medecin"
-      returnKeyType="done"
-      returnKeyLabel="done"
-    /> 
-    
-    : <MaterialIcons onPress={this.toggleTextField} name="add-circle" size={72} color="#5bc9ff" />
-    }
-    </View> */
-
-    // OLD MEDICIN CARD
-                    // <View>
-                //   <View style={styles.listItemCont}>
-                //     <Text style={styles.listItem}>
-                //       {item.text}
-                //       {this.state.descriptions[index] ? this.state.descriptions[index].description : 'No description'}
-                //     </Text>
-                //     <MaterialCommunityIcons onPress={() => this.deleteTask(index)} name="delete-circle" size={32} color="#ff5964" style={{marginRight:20}} />
-                //   </View>
-                //   <View style={styles.hr} />
-
-                // </View>
-  }
-  
+            {/*   */}
