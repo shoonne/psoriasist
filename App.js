@@ -3,7 +3,8 @@ import {View, Dimensions, ScrollView, Platform, Text } from 'react-native';
 import { Font } from 'expo';
 import { LinearGradient } from 'expo-linear-gradient';
 import RNEButton from './components/common/RNEButton';
-
+import { Icon } from 'native-base';
+import AnimatedHeader from 'react-native-animated-header';
 
 // Components
 import MyTreatments from './components/src/screens/MyTreatments'
@@ -29,22 +30,31 @@ let deviceWidth = Dimensions.get('window').width;
 let deviceHeight = Dimensions.get('window').height;
 const isAndroid = Platform.OS == "android";
 
+const bg = 'https://dummyimage.com/640x360/fff/aaa';
+const bg2 = require('./assets/background/headerimg3.png')
+
 
 class HomeScreen extends React.Component {
   // Header options
   static navigationOptions = {
-    cardStyle: {
-      backgroundColor:'red'
+    headerStyle: {
+      backgroundColor:'#2E1F5E',
+      color:'white',
+      borderBottomWidth: 0,
+      elevation: 0,
     },
-    headerBackground: (
-      <LinearGradient
-        colors={["#FF416C", "#FF4B2B"]}
-        style={{ flex: 1 }}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 0 }}
-      />
-    ),
+    // headerBackground: (
+    //   <LinearGradient
+    //     colors={["#c7ff94", "#ff2870"]}
+    //     style={{ flex: 1 }}
+    //     start={{ x: 0, y: 0 }}
+    //     end={{ x: 1, y: 0 }}
+    //   />
+    // ),
     title: 'Hem',
+    headerTitleStyle: {
+      color:'white',
+    },
   };
 
   constructor(props){
@@ -66,14 +76,28 @@ class HomeScreen extends React.Component {
   }
   render() {
     return (
-   
-      <View>
-       <ScrollView contentContainerStyle={{flexGrow:1, height: deviceHeight + 100, }}
+
+      <AnimatedHeader 
+      style={{flex: 1, }}
+      noBorder={true}
+      //backText='Back'
+      //title='Happy coding'
+      //renderLeft={() => (<Icon name='arrow-back' style={{ marginLeft: 20 }} />)}
+      //renderRight={() => (<Icon name='add' style={{ marginRight: 20 }} />)}
+      backStyle={{ marginLeft: 10 }}
+      backTextStyle={{fontSize: 14, color: '#000'}}
+      titleStyle={{ fontSize: 22, left: 20, bottom: 20, color: '#000' }}
+      headerMaxHeight={200}
+      imageSource={bg2}
+      toolbarColor='#FFF'
+      disabled={false}
+    >
+      <ScrollView contentContainerStyle={{flexGrow:1, height: deviceHeight + 100, }}
          scrollEnabled>
-        <View style={{flexDirection:'row', paddingTop: 90, justifyContent: 'space-around' }}>
+        <View style={{flexDirection:'row', paddingTop: 10, justifyContent: 'space-around' }}>
       
           <RNEButton 
-          color='#f50'
+          color='#EF2D56'
           iconName="heartbeat" 
           iconType="font-awesome" 
           btnText="Min behandling"
@@ -81,7 +105,7 @@ class HomeScreen extends React.Component {
           />
 
           <RNEButton          
-          color='#f50'
+          color='#5CC8FF'
           iconName="camera" 
           iconType="font-awesome" 
           btnText="Hud och nagelbilder"
@@ -92,14 +116,14 @@ class HomeScreen extends React.Component {
           <View style={{flexDirection:'row', paddingTop: 30, justifyContent: 'space-around' }}>
 
           <RNEButton          
-          color='#f50'
+          color='#B14AED'
           iconName="user-md" 
           iconType="font-awesome" 
           btnText="Läkarbesök"
           onPress={() => this.props.navigation.navigate('DoctorNotesTest')}/>
 
           <RNEButton          
-          color='#f50'
+          color='#04151F'
           iconName="info" 
           iconType="font-awesome" 
           btnText="Psoriasis"
@@ -107,15 +131,14 @@ class HomeScreen extends React.Component {
     
           </View>
 
-          {/* CAROUSELL */}
-          <View style={{paddingTop: 20}}>
-            <Text style={{textAlign:'center', padding: 20}}>För mer information</Text>
+          <View style={{paddingTop: 20, paddingBottom: 20}}>
+            <Text style={{fontSize: 14, fontWeight:'bold', marginLeft: 30}}>För mer information</Text>
             <MyCarousell/>
           </View>
 
         </ScrollView>
-        
-      </View>
+    </AnimatedHeader>
+      
     );
   }
 }
