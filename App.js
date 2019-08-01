@@ -132,7 +132,7 @@ class HomeScreen extends React.Component {
           </View>
 
           <View style={{paddingTop: 20, paddingBottom: 20}}>
-            <Text style={{fontSize: 14, fontWeight:'bold', marginLeft: 30}}>För mer information</Text>
+            <Text style={{fontSize: 14, fontWeight:'bold', textAlign:'center'}}>För mer information</Text>
             <MyCarousell/>
           </View>
 

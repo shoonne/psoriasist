@@ -6,11 +6,10 @@ let deviceWidth = Dimensions.get('window').width;
 
 
 const RNEButton = (props) => (
-    <View elevation={5} style={{justifyContent:'center', alignItems:'center',  height: 150, borderColor:'black', width: deviceWidth * 0.4,}}>
+    <View style={{justifyContent:'center', alignItems:'center',  height: props.height ? props.height : 150, borderColor:'black', width: deviceWidth * 0.4,}}>
         <Icon
-        
         raised
-        size={35}
+        size={props.size ? props.size : 35}
         name={props.iconName}
         type={props.iconType}
         color={props.color}

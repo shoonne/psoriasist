@@ -1,44 +1,62 @@
 import React, {Component} from 'react';
 import {
-  Text, 
   View, 
   FlatList, 
   AsyncStorage, 
   Keyboard, 
   Platform, 
-  ImageBackground, 
   Dimensions,
   Modal,
   Alert
   
 } from 'react-native';
-import { ListItem } from 'react-native-elements'
+import { ListItem, Avatar, Icon } from 'react-native-elements'
 import TouchableScale from 'react-native-touchable-scale'; // https://github.com/kohver/react-native-touchable-scale
 
-
-import MedicinCard from '../common/MedicinCard'
 import Header from '../common/Header'; 
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import {Fumi} from 'react-native-textinput-effects';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import AnimatedHeader from 'react-native-animated-header';
+
 
 // Redux
 import {connect} from 'react-redux'; 
 import {changeMedicinText} from './../../../actions';
 import RNEButton from '../../common/RNEButton';
 
+const bg2 = require('../../../assets/background/mytreatmentheader.png');
 const isAndroid = Platform.OS == "android";
 const viewPadding = 0;
+
+// const avatar =( <Avatar
+// rounded
+// icon={{name: 'user', type: 'font-awesome'}}
+// onPress={() => console.log("Works!")}
+// activeOpacity={0.7}
+// containerStyle={{flex: 2, marginLeft: 20, marginTop: 115}}
+// />);
 let deviceWidth = Dimensions.get('window').width;
 let deviceHeight = Dimensions.get('window').height;
 let text = 'Det är tidskrävande att ha psoriasis. Man mår dock ofta bättre om man tar hand om sig och håller reda på sina behandlingar. Några kan till och med vara besvärsfria ett tag.';
+
+
+const AvatarLi = () => (
+  <Icon
+  raised
+  name='tablets'
+  type='font-awesome'
+  color='#f50'
+  onPress={() => console.log('hello')} />
+)
 
 class MyTreatments extends Component {
   static navigationOptions = {
     title: 'Min behandling',
     headerStyle: {
-      backgroundColor: '#5bc9ff',
-      color:'white'
+      backgroundColor: '#EF2D56',
+    },
+    headerTitleStyle: {
+      color:'white',
     },
   };
     state = {
@@ -128,14 +146,30 @@ class MyTreatments extends Component {
         return (
             <View
             style={styles.container}>
-            <ImageBackground source={require('./../../../assets/background/clearblue.png')} style={{width: '100%', height: '100%'}}>
+                  <AnimatedHeader 
+      style={{flex: 1, }}
+      noBorder={true}
+      //backText='Back'
+      //title='Happy coding'
+      //renderLeft={() => (<Icon name='arrow-back' style={{ marginLeft: 20 }} />)}
+      //renderRight={() => (<Icon name='add' style={{ marginRight: 20 }} />)}
+      backStyle={{ marginLeft: 10 }}
+      backTextStyle={{fontSize: 14, color: '#000'}}
+      titleStyle={{ fontSize: 22, left: 20, bottom: 20, color: '#000' }}
+      headerMaxHeight={200}
+      imageSource={bg2}
+      toolbarColor='#FFF'
+      disabled={false}
+    >
               <FlatList 
-              ListHeaderComponent={() => <Header text={text}/>}
+             // ListHeaderComponent={() => <Header text={text}/>}
               style={styles.list}
               data={this.state.tasks}
               keyExtractor = { (item, index) => index.toString() }
               renderItem={({ item, index }) =>
+              <View style={{marginBottom: 10}} >
                   <ListItem
+                  containerStyle={{height: 150, width: deviceWidth}}
                   onLongPress={ () => Alert.alert(
                         'Alert Title',
                         'My Alert Msg',
@@ -155,19 +189,23 @@ class MyTreatments extends Component {
                   tension={100} // These props are passed to the parent component (here TouchableScale)
                   activeScale={0.95} //
                   linearGradientProps={{
-                    colors: ['#FF9800', '#F44336'],
+                    colors: ['#EF2D56', '#F44336'],
                     start: [1, 0],
                     end: [0.2, 0],
                   }}
                   //ViewComponent={LinearGradient} // Only if no expo
                   // leftAvatar={{ rounded: true, source: { uri: avatar_url } }}
                   title={item.text}
-                  titleStyle={{ color: 'white', fontWeight: 'bold' }}
+                  titleStyle={{ color: 'white', fontWeight: 'bold', fontSize: 30 }}
                   subtitleStyle={{ color: 'white' }}
                   subtitle={this.state.descriptions[index] ? this.state.descriptions[index].description : 'No description'}
                   chevronColor="white"
-                  chevron/>}
+                  chevron/>
+                </View>
+                  }
               />
+            
+              </AnimatedHeader>
               
             <Modal
               animationType="slide"
@@ -188,7 +226,7 @@ class MyTreatments extends Component {
                     label={'Lägg till medecin'}
                     iconClass={FontAwesomeIcon}
                     iconName={'medkit'}
-                    iconColor={'#5bc9ff'}
+                    iconColor={'#EF2D56'}
                     iconSize={20}
                     iconWidth={40}
                     inputPadding={16}
@@ -202,7 +240,7 @@ class MyTreatments extends Component {
                       label={'Lägg till beskrivning'}
                       iconClass={FontAwesomeIcon}
                       iconName={'pencil'}
-                      iconColor={'#5bc9ff'}
+                      iconColor={'#EF2D56'}
                       iconSize={20}
                       iconWidth={40}
                       inputPadding={16}
@@ -211,7 +249,7 @@ class MyTreatments extends Component {
 
                   <View style={{justifyContent:'center', alignItems:'center'}}>
                       <RNEButton
-                          color='#f50'
+                          color='#EF2D56'
                           iconName="plus" 
                           iconType="font-awesome" 
                           btnText="Lägg till"
@@ -221,7 +259,7 @@ class MyTreatments extends Component {
 
                     <View style={{justifyContent:'center', alignItems:'center'}}>
                       <RNEButton
-                          color='#f50'
+                          color='#EF2D56'
                           iconName="times" 
                           iconType="font-awesome" 
                           btnText="Avbryt"
@@ -232,16 +270,9 @@ class MyTreatments extends Component {
 
                  </View>
              </Modal>
-             <View style={{justifyContent:'center', alignItems:'center'}}>
-               <RNEButton
-                  color='#f50'
-                  iconName="plus" 
-                  iconType="font-awesome" 
-                  btnText="Lägg till medicin"
-                  onPress={() => {this.setModalVisible(true)}}
-               />
+             <View style={styles.fab}>
+             <RNEButton onPress={() => {this.setModalVisible(true)}} size={25} height={80} color='#EF2D56' iconName='plus' iconType='font-awesome'/>
              </View>
-            </ImageBackground>
           </View>
         );
     }
@@ -294,7 +325,6 @@ const styles = {
       flex: 1,
       justifyContent: "center",
       alignItems: "center",
-      backgroundColor: "#F5FCFF",
       padding: viewPadding,
     },
     list: {
@@ -344,7 +374,17 @@ const styles = {
       fontSize:20,
       borderWidth: 0.6,
       borderColor: '#ff5964',
-    }
+    },
+    fab:{
+      height: 50,
+      width: 50,
+      borderRadius: 200,
+      position: 'absolute',
+      bottom: 20,
+      right: 20,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
   };
 
   // matStateToProps takes in the state and returns an object
