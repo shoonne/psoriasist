@@ -25,6 +25,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 // Redux
 import {connect} from 'react-redux'; 
 import {changeMedicinText} from './../../../actions';
+import RNEButton from '../../common/RNEButton';
 
 const isAndroid = Platform.OS == "android";
 const viewPadding = 0;
@@ -175,7 +176,7 @@ class MyTreatments extends Component {
               onRequestClose={() => {
                 Alert.alert('Modal has been closed.');
               }}>
-                <View >
+                <View  style={{flex: 1,flexDirection:'column', justifyContent:'space-around'}}>
 
                 <View style={{height:100, marginTop: 100}}>
                     <Fumi
@@ -208,28 +209,38 @@ class MyTreatments extends Component {
                     />
                   </View>  
 
-                    <View style={{marginTop: 40,}}>
-                      <TouchableOpacity style={{justifyContent:'center', alignItems:'center'}} onPress={this.addTask}>
-                        <Text style={{color:'black', fontSize:19}}>LÄGG TILL</Text>
-                      </TouchableOpacity>
+                  <View style={{justifyContent:'center', alignItems:'center'}}>
+                      <RNEButton
+                          color='#f50'
+                          iconName="plus" 
+                          iconType="font-awesome" 
+                          btnText="Lägg till"
+                          onPress={this.addTask}
+                      />
                     </View>
 
-                    <TouchableOpacity
-                        onPress={() => {
-                          this.setModalVisible(!this.state.modalVisible);
-                        }}>
-                        <Text>Hide Modal</Text>
-                    </TouchableOpacity>
+                    <View style={{justifyContent:'center', alignItems:'center'}}>
+                      <RNEButton
+                          color='#f50'
+                          iconName="times" 
+                          iconType="font-awesome" 
+                          btnText="Avbryt"
+                          onPress={() => {this.setModalVisible(!this.state.modalVisible)}}
+                      />
+                    </View>
 
 
                  </View>
              </Modal>
-
-            <TouchableOpacity 
-            onPress={() => {this.setModalVisible(true);}}
-            style={{justifyContent:'center', alignItems:'center', borderWidth:0.5, backgroundColor:'#FF9800', marginBottom:80}}>
-            <Text style={{fontSize: 50, color:'white'}}>+</Text>
-            </TouchableOpacity>
+             <View style={{justifyContent:'center', alignItems:'center'}}>
+               <RNEButton
+                  color='#f50'
+                  iconName="plus" 
+                  iconType="font-awesome" 
+                  btnText="Lägg till medicin"
+                  onPress={() => {this.setModalVisible(true)}}
+               />
+             </View>
             </ImageBackground>
           </View>
         );

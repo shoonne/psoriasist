@@ -1,20 +1,16 @@
 import React from 'react';
-import {View, Dimensions, ScrollView, Platform, ImageBackground, Text } from 'react-native';
+import {View, Dimensions, ScrollView, Platform, Text } from 'react-native';
 import { Font } from 'expo';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Icon } from 'react-native-elements'
 import RNEButton from './components/common/RNEButton';
 
 
 // Components
-import GradientButton from 'react-native-gradient-buttons';
 import MyTreatments from './components/src/screens/MyTreatments'
 import SkinAndNailSelfieV2 from './components/src/screens/SkinAndNailSelfieV2';
 import Psoriasis from './components/src/screens/Psoriasis'
-import Appointments from './components/src/screens/Appointments';
 import DoctorNotesTest from './components/src/screens/DoctorNoteTest';
 import MyCarousell from './components/src/common/MyCarousell';
-import Header from './components/src/common/Header';
 
 // Navigation
 import { createAppContainer, createStackNavigator } from 'react-navigation'; // Version can be specified in package.json
@@ -23,20 +19,19 @@ import { createAppContainer, createStackNavigator } from 'react-navigation'; // 
 import {Provider} from 'react-redux';
 import {createStore} from 'redux'
 import firstReducer from './reducers/firstReducers';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 const store = createStore(firstReducer);
 
 
 
 
-
+// DEVICE INFORMATION
 let deviceWidth = Dimensions.get('window').width;
 let deviceHeight = Dimensions.get('window').height;
-let text = 'Psoriasis är en kronisk sjukdom men symtomen kan lindras eller försvinna med regelbunden behandling. Med mig kan du enkelt hålla koll på alla mediciner';
 const isAndroid = Platform.OS == "android";
 
 
 class HomeScreen extends React.Component {
+  // Header options
   static navigationOptions = {
     cardStyle: {
       backgroundColor:'red'
@@ -51,6 +46,7 @@ class HomeScreen extends React.Component {
     ),
     title: 'Hem',
   };
+
   constructor(props){
     super(props);
     this.state = {
@@ -59,6 +55,8 @@ class HomeScreen extends React.Component {
   }
 
   componentDidMount() {
+
+    // Load the fonts
     Font.loadAsync({
       'raleway-light': require('./assets/fonts/Raleway-Light.ttf'),
       'raleway-medium': require('./assets/fonts/Raleway-Medium.ttf'),
@@ -67,19 +65,12 @@ class HomeScreen extends React.Component {
     });
   }
   render() {
-    //console.log(this.props);
-
     return (
    
-      <View style={{  backgroundColor:'white'}}>
-      <ScrollView
-      contentContainerStyle={{flexGrow:1, height: deviceHeight + 100, }}
-      scrollEnabled
-      >
-      
-      {/* <Header  text={text}/> */}
-
-          <View style={{flexDirection:'row', paddingTop: 90, justifyContent: 'space-around' }}>
+      <View>
+       <ScrollView contentContainerStyle={{flexGrow:1, height: deviceHeight + 100, }}
+         scrollEnabled>
+        <View style={{flexDirection:'row', paddingTop: 90, justifyContent: 'space-around' }}>
       
           <RNEButton 
           color='#f50'
@@ -122,7 +113,6 @@ class HomeScreen extends React.Component {
             <MyCarousell/>
           </View>
 
-
         </ScrollView>
         
       </View>
@@ -131,12 +121,7 @@ class HomeScreen extends React.Component {
 }
 
 
-
-
-
-
-
-
+// React navigation
 const RootStack = createStackNavigator(
   {
     Home: {
@@ -166,8 +151,8 @@ export default class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
-    <AppContainer />
-    </Provider>);
+       <AppContainer />
+      </Provider>);
   }
 }
 
@@ -186,48 +171,6 @@ const styles = {
     shadowRadius: 9.11,
     elevation: 14,
   },
-  btn2: {
-    marginVertical: 8,  
-    borderWidth: 0 , 
-    borderRadius: 12, 
-    borderColor:'#FF5964',
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 7,
-    },
-    shadowOpacity: 0.41,
-    shadowRadius: 9.11,
-    elevation: 14,
-  },
-  btn3: {
-    marginVertical: 8,  
-    borderWidth: 0 , 
-    borderRadius: 12, 
-    borderColor:'#FF5964',
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 7,
-    },
-    shadowOpacity: 0.41,
-    shadowRadius: 9.11,
-    elevation: 14,
-  }, 
-  btn4: {
-    marginVertical: 8,  
-    borderWidth: 0 , 
-    borderRadius: 12, 
-    borderColor:'#FF5964',
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 7,
-    },
-    shadowOpacity: 0.41,
-    shadowRadius: 9.11,
-    elevation: 14,
-  }
 }
 
 
