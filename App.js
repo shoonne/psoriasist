@@ -1,6 +1,11 @@
 import React from 'react';
 import {View, Dimensions, ScrollView, Platform, ImageBackground, Text } from 'react-native';
 import { Font } from 'expo';
+import { LinearGradient } from 'expo-linear-gradient';
+import { Icon } from 'react-native-elements'
+import RNEButton from './components/common/RNEButton';
+
+
 // Components
 import GradientButton from 'react-native-gradient-buttons';
 import MyTreatments from './components/src/screens/MyTreatments'
@@ -18,6 +23,7 @@ import { createAppContainer, createStackNavigator } from 'react-navigation'; // 
 import {Provider} from 'react-redux';
 import {createStore} from 'redux'
 import firstReducer from './reducers/firstReducers';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 const store = createStore(firstReducer);
 
 
@@ -32,10 +38,18 @@ const isAndroid = Platform.OS == "android";
 
 class HomeScreen extends React.Component {
   static navigationOptions = {
-    title: 'Hem',
-    headerStyle: {
-      backgroundColor: '#5bc9ff',
+    cardStyle: {
+      backgroundColor:'red'
     },
+    headerBackground: (
+      <LinearGradient
+        colors={["#FF416C", "#FF4B2B"]}
+        style={{ flex: 1 }}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 0 }}
+      />
+    ),
+    title: 'Hem',
   };
   constructor(props){
     super(props);
@@ -58,77 +72,48 @@ class HomeScreen extends React.Component {
     return (
    
       <View style={{  backgroundColor:'white'}}>
-      <ImageBackground source={require('./assets/background/clearblue.png')} style={{width: '100%', height: '100%'}}>
       <ScrollView
       contentContainerStyle={{flexGrow:1, height: deviceHeight + 100, }}
       scrollEnabled
       >
       
-      <Header  text={text}/>
+      {/* <Header  text={text}/> */}
 
-          <View style={{flexDirection:'row', alignItems:'center', justifyContent:'center', paddingTop: 20}}>
-          
-          <GradientButton
-            style={styles.btn1}
-            text="MIN BEHANDLING"
-            textStyle={{ fontSize: 14, color:'white' }}
-            gradientBegin="#51E5FF"
-            gradientEnd="#18A0FA"
-
-            gradientDirection="horizontal"
-            height={isAndroid ? 100 : 150}
-            width={deviceWidth * 0.45}
-            radius={10}
-        
-            onPressAction={() => this.props.navigation.navigate('MyTreatments')}
+          <View style={{flexDirection:'row', paddingTop: 90, justifyContent: 'space-around' }}>
+      
+          <RNEButton 
+          color='#f50'
+          iconName="heartbeat" 
+          iconType="font-awesome" 
+          btnText="Min behandling"
+          onPress={() => this.props.navigation.navigate('MyTreatments')}
           />
 
-          <GradientButton
-            style={styles.btn2}
-            text="HUD OCH NAGELBILDER"
-            textStyle={{ fontSize: 12 }}
-            gradientBegin="#EFBCD5"
-            gradientEnd="#EC368D"
-            gradientDirection="diagonal"
-            height={isAndroid ? 100 : 150}
-            width={deviceWidth * 0.45}
-            radius={10}
-        
-            onPressAction={() => this.props.navigation.navigate('SkinAndNailSelfie')}
-          />
-
+          <RNEButton          
+          color='#f50'
+          iconName="camera" 
+          iconType="font-awesome" 
+          btnText="Hud och nagelbilder"
+          onPress={() => this.props.navigation.navigate('SkinAndNailSelfie')}/>
           </View>
 
 
-          <View style={{flexDirection:'row', alignItems:'center', justifyContent:'center', paddingTop: 20}}>
+          <View style={{flexDirection:'row', paddingTop: 30, justifyContent: 'space-around' }}>
 
-        <GradientButton
-            style={styles.btn3}
-            text="LÄKARBESÖK"
-            textStyle={{ fontSize: 14 }}
-            gradientBegin="#59CD90"
-            gradientEnd="#5A9367"
-            gradientDirection="diagonal"
-            height={isAndroid ? 100 : 150}
-            width={deviceWidth * 0.45}
-            radius={10}
-        
-            onPressAction={() => this.props.navigation.navigate('DoctorNotesTest')}
-          />
+          <RNEButton          
+          color='#f50'
+          iconName="user-md" 
+          iconType="font-awesome" 
+          btnText="Läkarbesök"
+          onPress={() => this.props.navigation.navigate('DoctorNotesTest')}/>
 
-        <GradientButton
-            style={styles.btn4}
-            text="VAD ÄR PSORIASIS?"
-            textStyle={{ fontSize: 14 }}
-            gradientBegin="#ff4b1f"
-            gradientEnd="#ff9068"
-            gradientDirection="diagonal"
-            height={isAndroid ? 100 : 150}
-            width={deviceWidth * 0.45}
-            radius={10}
-        
-            onPressAction={() => this.props.navigation.navigate('Psoriasis')}
-          />
+          <RNEButton          
+          color='#f50'
+          iconName="info" 
+          iconType="font-awesome" 
+          btnText="Psoriasis"
+          onPress={() => this.props.navigation.navigate('Psoriasis')}/>
+    
           </View>
 
           {/* CAROUSELL */}
@@ -139,7 +124,7 @@ class HomeScreen extends React.Component {
 
 
         </ScrollView>
-        </ImageBackground>
+        
       </View>
     );
   }
