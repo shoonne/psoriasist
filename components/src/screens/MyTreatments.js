@@ -146,27 +146,27 @@ class MyTreatments extends Component {
         return (
             <View
             style={styles.container}>
-                  <AnimatedHeader 
-      style={{flex: 1, }}
-      noBorder={true}
-      //backText='Back'
-      //title='Happy coding'
-      //renderLeft={() => (<Icon name='arrow-back' style={{ marginLeft: 20 }} />)}
-      //renderRight={() => (<Icon name='add' style={{ marginRight: 20 }} />)}
-      backStyle={{ marginLeft: 10 }}
-      backTextStyle={{fontSize: 14, color: '#000'}}
-      titleStyle={{ fontSize: 22, left: 20, bottom: 20, color: '#000' }}
-      headerMaxHeight={200}
-      imageSource={bg2}
-      toolbarColor='#FFF'
-      disabled={false}
-    >
+            <AnimatedHeader 
+            style={{flex: 1, }}
+            noBorder={true}
+            //backText='Back'
+            //title='Happy coding'
+            //renderLeft={() => (<Icon name='arrow-back' style={{ marginLeft: 20 }} />)}
+            //renderRight={() => (<Icon name='add' style={{ marginRight: 20 }} />)}
+            backStyle={{ marginLeft: 10 }}
+            backTextStyle={{fontSize: 14, color: '#000'}}
+            titleStyle={{ fontSize: 22, left: 20, bottom: 20, color: '#000' }}
+            headerMaxHeight={200}
+            imageSource={bg2}
+            toolbarColor='#FFF'
+            disabled={false}
+          >
               <FlatList 
              // ListHeaderComponent={() => <Header text={text}/>}
               style={styles.list}
               data={this.state.tasks}
               keyExtractor = { (item, index) => index.toString() }
-              renderItem={({ item, index }) =>
+              renderItem={({ item, index }) => 
               <View style={{marginBottom: 10}} >
                   <ListItem
                   containerStyle={{height: 150, width: deviceWidth}}

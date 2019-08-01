@@ -5,9 +5,14 @@ import {
     Keyboard, 
     AsyncStorage,
     Dimensions,
-    Text
+    Text,
+    Alert
 } from 'react-native';
-import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
+import { TextInput} from 'react-native-gesture-handler';
+import { ListItem} from 'react-native-elements'
+import TouchableScale from 'react-native-touchable-scale'; // https://github.com/kohver/react-native-touchable-scale
+import RNEButton from '../../common/RNEButton';
+
 
 const isAndroid = Platform.OS == "android";
 const viewPadding = 0;
@@ -84,27 +89,61 @@ export default class DoctorNotesTest extends React.Component {
               {/* TODO: STYLE THE NOTES AND THE TEXTINPUT */}
 
         return (
-        <View style={{justifyContent:'center', alignItems:'center'}}>
-
+        <View style={{alignItems:'center'}} >      
         <TextInput 
+        multiline={true}
         value={this.state.text}
         onChangeText={this.changeTextHandler}
-        style={{borderColor:'black', borderWidth:0.6, height: 90, width: deviceWidth*0.9, paddingLeft: 10, marginTop: 10}}/>
+        style={{borderWidth:0.6, height: 90, width: deviceWidth*0.9, paddingLeft: 10, marginTop: 10}}/>
 
-        <TouchableOpacity onPress={this.addNote} style={{marginTop: 20}}>
-          <Text>LÄGG TILL ANTECKNING</Text>
-        </TouchableOpacity>
+         <RNEButton
+          color='#EF2D56'
+          iconName="plus" 
+          iconType="font-awesome" 
+          btnText="Lägg till"
+          onPress={this.addNote}
+      />
         <View>
 
         {this.state.notes.map((note, i) => {
           return (
-            <View style={{flexDirection:'row'}} key={i}>
-              <Text>{note.text}</Text>
-              <TouchableOpacity onPress={() => this.deleteNote(i)}>
-                <Text style={{marginLeft: 20,fontWeight:'bold'}}>Delete</Text>
-              </TouchableOpacity>
-            </View>
+
+            <ListItem
+            key={i}
+                  containerStyle={{height: 150, width: deviceWidth}}
+                  onLongPress={ () => Alert.alert(
+                        'Alert Title',
+                        'My Alert Msg',
+                        [
+                          {text: 'Delete', onPress: () => this.deleteNote(i)},
+                          {
+                            text: 'Cancel',
+                            onPress: () => console.log('Cancel Pressed'),
+                            style: 'cancel',
+                          },
+                          {text: 'OK', onPress: () => console.log('OK Pressed')},
+                        ],
+                        {cancelable: false},
+                      )}
+                  Component={TouchableScale}
+                  friction={90} //
+                  tension={100} // These props are passed to the parent component (here TouchableScale)
+                  activeScale={0.95} //
+                  linearGradientProps={{
+                    colors: ['#EF2D56', '#F44336'],
+                    start: [1, 0],
+                    end: [0.2, 0],
+                  }}
+                  //ViewComponent={LinearGradient} // Only if no expo
+                  // leftAvatar={{ rounded: true, source: { uri: avatar_url } }}
+                  titleStyle={{ color: 'white', fontWeight: 'bold', fontSize: 30 }}
+                  subtitleStyle={{ color: 'white' }}
+                  subtitle={note.text}
+                  chevronColor="white"
+                  chevron/>
+
             );
+
         })}
 
         </View>

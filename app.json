@@ -13,9 +13,9 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
-      "image": "./assets/splashscreen2.png",
+      "image": "./assets/background/launchdark.png",
       "resizeMode": "contain",
-      "backgroundColor": "#5bc9ff"
+      "backgroundColor": "#2e1f5e"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
