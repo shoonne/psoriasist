@@ -10,7 +10,8 @@ import {
   Alert
   
 } from 'react-native';
-import { ListItem, Avatar, Icon } from 'react-native-elements'
+import { LinearGradient } from 'expo-linear-gradient';
+import { ListItem, Icon } from 'react-native-elements'
 import TouchableScale from 'react-native-touchable-scale'; // https://github.com/kohver/react-native-touchable-scale
 
 import Header from '../common/Header'; 
@@ -22,39 +23,32 @@ import AnimatedHeader from 'react-native-animated-header';
 // Redux
 import {connect} from 'react-redux'; 
 import {changeMedicinText} from './../../../actions';
-import RNEButton from '../../common/RNEButton';
+import RNEButton from '../common/RNEButton';
 
 const bg2 = require('../../../assets/background/mytreatmentheader.png');
 const isAndroid = Platform.OS == "android";
 const viewPadding = 0;
-
-// const avatar =( <Avatar
-// rounded
-// icon={{name: 'user', type: 'font-awesome'}}
-// onPress={() => console.log("Works!")}
-// activeOpacity={0.7}
-// containerStyle={{flex: 2, marginLeft: 20, marginTop: 115}}
-// />);
 let deviceWidth = Dimensions.get('window').width;
 let deviceHeight = Dimensions.get('window').height;
 let text = 'Det är tidskrävande att ha psoriasis. Man mår dock ofta bättre om man tar hand om sig och håller reda på sina behandlingar. Några kan till och med vara besvärsfria ett tag.';
 
 
-const AvatarLi = () => (
-  <Icon
-  raised
-  name='tablets'
-  type='font-awesome'
-  color='#f50'
-  onPress={() => console.log('hello')} />
-)
 
 class MyTreatments extends Component {
   static navigationOptions = {
+    headerTintColor: 'white',
     title: 'Min behandling',
     headerStyle: {
-      backgroundColor: '#EF2D56',
+      //backgroundColor: '#EF2D56' ,
     },
+    headerBackground: (
+      <LinearGradient
+        colors={["#EF2D56", "#E52468"]}
+        style={{ flex: 1 }}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 0 }}
+      />
+    ),
     headerTitleStyle: {
       color:'white',
     },
@@ -381,7 +375,6 @@ const styles = {
       borderRadius: 200,
       position: 'absolute',
       bottom: 20,
-      right: 20,
       justifyContent: 'center',
       alignItems: 'center',
     },

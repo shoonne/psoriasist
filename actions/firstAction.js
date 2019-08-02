@@ -1,7 +1,7 @@
-import { CHANGE_MEDICIN_TEXT } from './types';
-export const changeMedicinText = (text) => {
+import { CHANGE_DOKTOR_NOTE_TEXT } from './types';
+export const changeTextHandler = (text) => {
     return {
-        type: CHANGE_MEDICIN_TEXT,
+        type: CHANGE_DOKTOR_NOTE_TEXT,
         payload: text 
     };
 }

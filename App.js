@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Dimensions, ScrollView, Platform, Text } from 'react-native';
 import { Font } from 'expo';
 import { LinearGradient } from 'expo-linear-gradient';
-import RNEButton from './components/common/RNEButton';
+import RNEButton from './components/src/common/RNEButton';
 import { Icon } from 'native-base';
 import AnimatedHeader from 'react-native-animated-header';
 
@@ -10,7 +10,8 @@ import AnimatedHeader from 'react-native-animated-header';
 import MyTreatments from './components/src/screens/MyTreatments'
 import SkinAndNailSelfieV2 from './components/src/screens/SkinAndNailSelfieV2';
 import Psoriasis from './components/src/screens/Psoriasis'
-import DoctorNotesTest from './components/src/screens/DoctorNoteTest';
+import DoctorNoteTest from './components/src/screens/DoctorNotes';
+import DoctorVisitStartScreen from './components/src/screens/DoctorVisitStartScreen';
 import MyCarousell from './components/src/common/MyCarousell';
 
 // Navigation
@@ -38,19 +39,19 @@ class HomeScreen extends React.Component {
   // Header options
   static navigationOptions = {
     headerStyle: {
-      backgroundColor:'#2E1F5E',
+      //backgroundColor:'#2E1F5E',
       color:'white',
       borderBottomWidth: 0,
       elevation: 0,
     },
-    // headerBackground: (
-    //   <LinearGradient
-    //     colors={["#c7ff94", "#ff2870"]}
-    //     style={{ flex: 1 }}
-    //     start={{ x: 0, y: 0 }}
-    //     end={{ x: 1, y: 0 }}
-    //   />
-    // ),
+    headerBackground: (
+      <LinearGradient
+        colors={["#2E1F5E", "#3C1B66"]}
+        style={{ flex: 1 }}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 0 }}
+      />
+    ),
     title: 'Hem',
     headerTitleStyle: {
       color:'white',
@@ -120,7 +121,7 @@ class HomeScreen extends React.Component {
           iconName="user-md" 
           iconType="font-awesome" 
           btnText="Läkarbesök"
-          onPress={() => this.props.navigation.navigate('DoctorNotesTest')}/>
+          onPress={() => this.props.navigation.navigate('DoctorVisitStartScreen')}/>
 
           <RNEButton          
           color='#04151F'
@@ -147,21 +148,18 @@ class HomeScreen extends React.Component {
 // React navigation
 const RootStack = createStackNavigator(
   {
-    Home: {
-      screen: HomeScreen,
-    },
-    MyTreatments: {
-      screen: MyTreatments,
-    },
-    DoctorNotesTest:{
-      screen: DoctorNotesTest,
-    },
-    SkinAndNailSelfie:{
-      screen: SkinAndNailSelfieV2
-    },
-    Psoriasis:{
-      screen: Psoriasis
-    }
+    Home: HomeScreen,
+    
+    MyTreatments: MyTreatments,
+    
+    DoctorVisitStartScreen: DoctorVisitStartScreen,
+    
+    DoctorNoteTest: DoctorNoteTest, 
+    
+    SkinAndNailSelfie: SkinAndNailSelfieV2,
+    
+    Psoriasis: Psoriasis
+    
   },
   {
     initialRouteName: 'Home',
