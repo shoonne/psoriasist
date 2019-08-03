@@ -66,7 +66,7 @@ export default class DoctorNotesTest extends React.Component {
         if(notEmpty){
             this.setState( 
                 prevState => {
-                    let {notes, text } = prevState;
+                    let {notes, text} = prevState;
 
                     return {
                         notes: notes.concat({key: notes.length, text: text}),
@@ -188,13 +188,15 @@ let Notes = {
       );
     },
 
-    convertToStringWithSeparators(notes) {
-      return notes.map(note => note.text).join("||");
-    },
+
     all(callback) {
       return AsyncStorage.getItem("NOTES", (err, notes) =>
         this.convertToArrayOfObject(notes, callback)
       );
+    },
+    
+    convertToStringWithSeparators(notes) {
+      return notes.map(note => note.text).join("||");
     },
 
     save(notes) {

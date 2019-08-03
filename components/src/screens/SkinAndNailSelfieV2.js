@@ -18,7 +18,7 @@ export default class SkinAndNailSelfieV2 extends React.Component {
           isLoaded: true,
           imageUri: response
         });
-        // console.log(response)
+         console.log(response)
       });
     };
 
@@ -28,17 +28,27 @@ export default class SkinAndNailSelfieV2 extends React.Component {
       }
 
     takePicture = async () => {
-        try {
-        const imageData = await this.camera.takePictureAsync({
-            fixOrientation: true
-        });
-        this.setState({
-            imageUri: imageData.uri
-        });
-        this._saveImageAsync();
-        } catch (err) {
-        console.log("err: ", err);
+
+      try {
+        const value = await AsyncStorage.getAllKeys();
+        if (value !== null) {
+          // We have data!!
+          console.log(value);
         }
+      } catch (error) {
+        // Error retrieving data
+      }
+        // try {
+        // const imageData = await this.camera.takePictureAsync({
+        //     fixOrientation: true
+        // });
+        // this.setState({
+        //     imageUri: imageData.uri
+        // });
+        // this._saveImageAsync();
+        // } catch (err) {
+        // console.log("err: ", err);
+        // }
     };
 
     _saveImageAsync = async () => {

@@ -13,6 +13,8 @@ import Psoriasis from './components/src/screens/Psoriasis'
 import DoctorNoteTest from './components/src/screens/DoctorNotes';
 import DoctorVisitStartScreen from './components/src/screens/DoctorVisitStartScreen';
 import MyCarousell from './components/src/common/MyCarousell';
+import CameraPage from './components/tests/camera-page';
+
 
 // Navigation
 import { createAppContainer, createStackNavigator } from 'react-navigation'; // Version can be specified in package.json
@@ -156,7 +158,7 @@ const RootStack = createStackNavigator(
     
     DoctorNoteTest: DoctorNoteTest, 
     
-    SkinAndNailSelfie: SkinAndNailSelfieV2,
+    SkinAndNailSelfie: CameraPage,
     
     Psoriasis: Psoriasis
     
