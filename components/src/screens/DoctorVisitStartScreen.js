@@ -2,11 +2,11 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, Dimensions, ScrollView , Button} from 'react-native';
 import { Icon } from 'react-native-elements'
-import { LinearGradient } from 'expo-linear-gradient';
+import { APP_COLOR } from '../../../utils/Colors';
+
 
 
 let deviceWidth = Dimensions.get('window').width;
-const TAB_COLOR = '#B14AED';
 
 
 export default class DoctorVisitStartScreen extends Component {
@@ -14,16 +14,8 @@ export default class DoctorVisitStartScreen extends Component {
     headerTintColor: 'white',
     title: 'Läkarbesök',
     headerStyle: {
-      backgroundColor: '#EF2D56' ,
+      backgroundColor: APP_COLOR ,
     },
-    // headerBackground: (
-    //   <LinearGradient
-    //     colors={["#B14AED", "#BD1AD1"]}
-    //     style={{ flex: 1 }}
-    //     start={{ x: 0, y: 0 }}
-    //     end={{ x: 1, y: 0 }}
-    //   />
-    // ),
     headerTitleStyle: {
       color:'white',
     },

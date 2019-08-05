@@ -10,12 +10,11 @@ import {
     Dimensions } from 'react-native';
 import { Camera } from 'expo-camera'
 import * as Permissions from 'expo-permissions'
-import { Icon } from 'react-native-elements'
 
-import styles from './styles';
-import Toolbar from './toolbar.component';
-import CameraCarousell from '../src/common/CameraCarousell';
-import ImageBrowser from './ImageBrowser';
+import styles from '../../tests/styles';
+import Toolbar from '../../tests/toolbar.component';
+import CameraCarousell from '../common/CameraCarousell';
+import ImageBrowser from '../common/ImageBrowser';
 import { ScrollView } from 'react-native-gesture-handler';
 
 

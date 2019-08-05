@@ -1,17 +1,16 @@
 import React from 'react';
-import {View, Dimensions, ScrollView, Platform, Text } from 'react-native';
+import {View, ScrollView, Text } from 'react-native';
 import * as Font from 'expo-font';
-import RNEButton from './components/src/common/RNEButton';
+import RNEButton from './components/src/common/buttons/IconBtn';
 import AnimatedHeader from 'react-native-animated-header';
 
 // Components
 import MyTreatments from './components/src/screens/MyTreatments'
-import SkinAndNailSelfieV2 from './components/src/screens/SkinAndNailSelfieV2';
 import Psoriasis from './components/src/screens/Psoriasis'
 import DoctorNoteTest from './components/src/screens/DoctorNotes';
 import DoctorVisitStartScreen from './components/src/screens/DoctorVisitStartScreen';
 import MyCarousell from './components/src/common/MyCarousell';
-import CameraPage from './components/tests/camera-page';
+import CameraPage from './components/src/screens/CameraPage';
 
 
 // Navigation
@@ -27,9 +26,9 @@ const store = createStore(firstReducer);
 
 
 // DEVICE INFORMATION
-let deviceWidth = Dimensions.get('window').width;
-let deviceHeight = Dimensions.get('window').height;
-const isAndroid = Platform.OS == "android";
+// let deviceWidth = Dimensions.get('window').width;
+// let deviceHeight = Dimensions.get('window').height;
+// const isAndroid = Platform.OS == "android";
 
 const bg = 'https://dummyimage.com/640x360/fff/aaa';
 const bg2 = require('./assets/background/startscreenred.png')
@@ -58,7 +57,6 @@ class HomeScreen extends React.Component {
   }
 
   componentDidMount() {
-
     // Load the fonts
     Font.loadAsync({
       'raleway-light': require('./assets/fonts/Raleway-Light.ttf'),
@@ -73,39 +71,29 @@ class HomeScreen extends React.Component {
       <AnimatedHeader 
       style={{flex: 1}}
       noBorder={true}
-      //backText='Back'
-      //title='Happy coding'
-      //renderLeft={() => (<Icon name='arrow-back' style={{ marginLeft: 20 }} />)}
-      //renderRight={() => (<Icon name='add' style={{ marginRight: 20 }} />)}
-      backStyle={{ marginLeft: 10 }}
-      backTextStyle={{fontSize: 14, color: '#000'}}
-      titleStyle={{ fontSize: 22, left: 20, bottom: 20, color: '#000' }}
       imageSource={bg2}
-      toolbarColor='#FFF'
-      disabled={false}
-    >
+      disabled={false}>
       <ScrollView scrollEnabled>
-        <View style={{flexDirection:'row', justifyContent: 'space-around' }}>
-      
-          <RNEButton 
-          color='#EF2D56'
-          iconName="heartbeat" 
-          iconType="font-awesome" 
-          btnText="Min behandling"
-          onPress={() => this.props.navigation.navigate('MyTreatments')}
-          />
 
-          <RNEButton          
-          color='#3772FF'
-          iconName="camera" 
-          iconType="font-awesome" 
-          btnText="Hud och nagelbilder"
-          onPress={() => this.props.navigation.navigate('SkinAndNailSelfie')}/>
-          </View>
+        <View style={{flexDirection:'row', justifyContent: 'space-around' }}>
+            <RNEButton 
+            color='#EF2D56'
+            iconName="heartbeat" 
+            iconType="font-awesome" 
+            btnText="Min behandling"
+            onPress={() => this.props.navigation.navigate('MyTreatments')}
+            />
+
+            <RNEButton          
+            color='#3772FF'
+            iconName="camera" 
+            iconType="font-awesome" 
+            btnText="Hud och nagelbilder"
+            onPress={() => this.props.navigation.navigate('SkinAndNailSelfie')}/>
+         </View>
 
 
           <View style={{flexDirection:'row', paddingTop: 30, justifyContent: 'space-around' }}>
-
           <RNEButton          
           color='#FF007F'
           iconName="user-md" 
@@ -167,22 +155,6 @@ export default class App extends React.Component {
   }
 }
 
-const styles = {
-  btn1: {
-    marginVertical: 8, 
-    borderWidth: 0 , 
-    borderRadius: 12, 
-    borderColor:'#FF5964',
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 7,
-    },
-    shadowOpacity: 0.41,
-    shadowRadius: 9.11,
-    elevation: 14,
-  },
-}
 
 
 

@@ -11,7 +11,7 @@ import {
     TouchableOpacity
 } from 'react-native';
 import { TextInput} from 'react-native-gesture-handler';
-import RNEButton from '../common/RNEButton';
+import IconBtn from '../common/buttons/IconBtn';
 
 
 const isAndroid = Platform.OS == "android";
@@ -124,7 +124,7 @@ export default class DoctorNotesTest extends React.Component {
               onChangeText={this.changeTextHandler}
               style={{ borderBottomWidth:0.5, maxHeight: 150, width: deviceWidth*0.9, paddingLeft: 10, marginTop: 10}}/>
 
-              <RNEButton
+              <IconBtn
                 color='#EF2D56'
                 size={20}
                 iconName="plus" 

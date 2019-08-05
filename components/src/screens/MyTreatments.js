@@ -14,16 +14,13 @@ import {
 } from 'react-native';
 
 import AnimatedHeader from 'react-native-animated-header';
-
-import RNEButton from '../common/RNEButton';
-import RoundedBtn from './../common/RoundedBtn';
+import RNEButton from '../common/buttons/IconBtn';
+import RoundedBtn from '../common/buttons/RoundedBtn';
 
 const bg2 = require('../../../assets/background/pills.png');
 const isAndroid = Platform.OS == "android";
 const viewPadding = 0;
 let deviceWidth = Dimensions.get('window').width;
-let deviceHeight = Dimensions.get('window').height;
-
 const APP_COLOR = '#EF2D56';
 
 
@@ -111,6 +108,7 @@ class MyTreatments extends Component {
     render(){
       const {container, animatedHeader, list, modal, shadow, inputText, addNewMedicinBtn} = styles;
       const {tasks, modalVisible, text, description} = this.state; 
+
         return (
             <View
             style={container}>
@@ -119,16 +117,19 @@ class MyTreatments extends Component {
             noBorder={true}
             headerMaxHeight={200}
             imageSource={bg2}>
-              <FlatList 
-              style={list}
-              data={tasks}
-              keyExtractor = { (item, index) => index.toString() }
-              renderItem={({ item, index }) => 
-              <TouchableOpacity style={{ width: deviceWidth * 0.9, height: 150, backgroundColor:'red', marginBottom: 10}}>
-               <Text>{item.text}</Text>
-              </TouchableOpacity>
-                  }
-              />
+
+            <FlatList 
+            style={list}
+            data={tasks}
+            keyExtractor = { (item, index) => index.toString() }
+            renderItem={({ item, index }) => 
+
+            // DESIGN CARD 
+            <TouchableOpacity style={{ width: deviceWidth * 0.9, height: 150, backgroundColor:'red', marginBottom: 10}}>
+            <Text>{item.text}</Text>
+            </TouchableOpacity>
+                }
+            />
             
               </AnimatedHeader>
               
@@ -142,31 +143,29 @@ class MyTreatments extends Component {
                 <View style={modal}>
 
                 <View style={shadow}>
-                <TextInput
-                onChangeText={this.changeTextHandler}
-                onSubmitEditing={this.addTask}
-                style={inputText}
-                  value={text}
-                  placeholder={"Namn"}
-                  placeholderTextColor={'#DDDDDD'}
-                />
+                  <TextInput
+                  onChangeText={this.changeTextHandler}
+                  onSubmitEditing={this.addTask}
+                  style={inputText}
+                    value={text}
+                    placeholder={"Namn"}
+                    placeholderTextColor={'#DDDDDD'}
+                  />
 
-                <TextInput
-                onChangeText={this.changeTextHandlerTwo}
-                style={inputText}
+                  <TextInput
+                  onChangeText={this.changeTextHandlerTwo}
+                  style={inputText}
                   value={description}
                   placeholder={"Beskrivning"}
                   placeholderTextColor={'#DDDDDD'}
+                  />
 
-                />
-
-                <TextInput
-                style={inputText}
+                  <TextInput
+                  style={inputText}
                   value={text}
                   placeholder={"Frekvens"}
                   placeholderTextColor={'#DDDDDD'}
-
-                />
+                  />
                 </View>
 
                 <RoundedBtn 
@@ -178,14 +177,18 @@ class MyTreatments extends Component {
                 <RoundedBtn 
                 text={"AVBRYT"}
                 textColor={APP_COLOR}
-                onPress={() => {this.setModalVisible(modalVisible)}} 
+                onPress={() => {this.setModalVisible(!modalVisible)}} 
                 style={{marginTop: 10, borderWidth:0.5, borderColor: APP_COLOR}}/>
 
               </View>
              </Modal>
+
              <View style={addNewMedicinBtn}>
-             <RNEButton onPress={() => {this.setModalVisible(true)}} size={25} height={80} color={APP_COLOR} iconName='plus' iconType='font-awesome'/>
+                <RNEButton 
+                onPress={() => {this.setModalVisible(true)}} 
+                size={25} height={80} color={APP_COLOR} iconName='plus' iconType='font-awesome'/>
              </View>
+
           </View>
         );
     }

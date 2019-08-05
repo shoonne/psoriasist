@@ -1,7 +1,8 @@
 import React from 'react';
 import { View, ImageBackground, ScrollView, Dimensions, Image } from 'react-native';
-import Header from '../common/Header';
+import ChatBubble from '../common/ChatBubble';
 import TextBox from '../common/TextBox';
+import APP_COLOR from './../../../utils/Colors';
 
 // let deviceWidth = Dimensions.get('window').width;
 
@@ -63,7 +64,7 @@ class Psoriasis extends React.Component {
       return (
         <View>
         <ScrollView contentContainerStyle={{justifyContent:'center', alignItems:'center'}}>
-        <Header text={'Här kan du läsa fakta om Psoriasis och dess olika former samt hur du kan behandla det själv.'}/>
+        <ChatBubble text={'Här kan du läsa fakta om Psoriasis och dess olika former samt hur du kan behandla det själv.'}/>
         <View style={{flex:1 , width: '100%', }}>
         <Image 
         style={{ flex: 1,
