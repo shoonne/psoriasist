@@ -10,10 +10,8 @@ import {
     FlatList,
     TouchableOpacity
 } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
 import { TextInput} from 'react-native-gesture-handler';
 import RNEButton from '../common/RNEButton';
-import GradientCard from '../common/GradietCard';
 
 
 const isAndroid = Platform.OS == "android";
@@ -27,14 +25,6 @@ export default class DoctorNotesTest extends React.Component {
     headerStyle: {
       //backgroundColor: '#EF2D56' ,
     },
-    headerBackground: (
-      <LinearGradient
-        colors={["#B14AED", "#BD1AD1"]}
-        style={{ flex: 1 }}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 0 }}
-      />
-    ),
     headerTitleStyle: {
       color:'white',
     },

@@ -1,7 +1,7 @@
 import Carousel from 'react-native-snap-carousel';
 import React, {Component} from 'react';
-import { View, Image, Dimensions, Linking, TouchableOpacity, Text  } from 'react-native';
-import { Card, ListItem, Button, Icon } from 'react-native-elements'
+import { Dimensions, Linking, Text  } from 'react-native';
+import { Card, Button, Icon } from 'react-native-elements'
 
 
 let deviceWidth = Dimensions.get('window').width;
@@ -59,7 +59,7 @@ export default class MyCarousel extends Component {
     _renderItem ({item, index}) {
         return (
             <Card
-            containerStyle={{backgroundColor:'#2E1F5E', padding: 40, borderRadius: 10}}
+            containerStyle={{backgroundColor:'#ef2d56', padding: 40, borderRadius: 10}}
             imageProps={{resizeMode: item.resizeMode ? 'contain' : null}}
             title={item.title}
             titleStyle={{color:'white'}}
@@ -68,19 +68,13 @@ export default class MyCarousel extends Component {
                 {item.description}
             </Text>
             <Button
+            
             onPress={()=> {Linking.openURL(item.url)}}
                 icon={<Icon name='link' color='#ffffff' />}
-                backgroundColor='#03A9F4'
-                buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+              
+                buttonStyle={{borderWidth:0.4, borderColor:'white', backgroundColor:'#ef2d56', borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
                 title=' Besök hemsida' />
             </Card>
-
-            // <View style={{backgroundColor:'white', padding: 20, width: deviceWidth}}>
-            // <TouchableOpacity onPress={()=> {Linking.openURL(item.url)}}>
-            //     <Image source={{uri: item.illustration}} 
-            //     style={{width: deviceWidth * 0.9, height:200, resizeMode: item.resizeMode ? 'contain' : null}}/>
-            // </TouchableOpacity>
-            // </View>
         );
     }
 

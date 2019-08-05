@@ -1,9 +1,7 @@
 import React from 'react';
 import {View, Dimensions, ScrollView, Platform, Text } from 'react-native';
-import { Font } from 'expo';
-import { LinearGradient } from 'expo-linear-gradient';
+import * as Font from 'expo-font';
 import RNEButton from './components/src/common/RNEButton';
-import { Icon } from 'native-base';
 import AnimatedHeader from 'react-native-animated-header';
 
 // Components
@@ -34,26 +32,18 @@ let deviceHeight = Dimensions.get('window').height;
 const isAndroid = Platform.OS == "android";
 
 const bg = 'https://dummyimage.com/640x360/fff/aaa';
-const bg2 = require('./assets/background/headerimg3.png')
+const bg2 = require('./assets/background/startscreenred.png')
 
 
 class HomeScreen extends React.Component {
   // Header options
   static navigationOptions = {
     headerStyle: {
-      //backgroundColor:'#2E1F5E',
+      backgroundColor:'#ef2d56',
       color:'white',
       borderBottomWidth: 0,
       elevation: 0,
     },
-    headerBackground: (
-      <LinearGradient
-        colors={["#2E1F5E", "#3C1B66"]}
-        style={{ flex: 1 }}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 0 }}
-      />
-    ),
     title: 'Hem',
     headerTitleStyle: {
       color:'white',
@@ -81,7 +71,7 @@ class HomeScreen extends React.Component {
     return (
 
       <AnimatedHeader 
-      style={{flex: 1, }}
+      style={{flex: 1}}
       noBorder={true}
       //backText='Back'
       //title='Happy coding'
@@ -90,14 +80,12 @@ class HomeScreen extends React.Component {
       backStyle={{ marginLeft: 10 }}
       backTextStyle={{fontSize: 14, color: '#000'}}
       titleStyle={{ fontSize: 22, left: 20, bottom: 20, color: '#000' }}
-      headerMaxHeight={200}
       imageSource={bg2}
       toolbarColor='#FFF'
       disabled={false}
     >
-      <ScrollView contentContainerStyle={{flexGrow:1, height: deviceHeight + 100, }}
-         scrollEnabled>
-        <View style={{flexDirection:'row', paddingTop: 10, justifyContent: 'space-around' }}>
+      <ScrollView scrollEnabled>
+        <View style={{flexDirection:'row', justifyContent: 'space-around' }}>
       
           <RNEButton 
           color='#EF2D56'
@@ -108,7 +96,7 @@ class HomeScreen extends React.Component {
           />
 
           <RNEButton          
-          color='#5CC8FF'
+          color='#3772FF'
           iconName="camera" 
           iconType="font-awesome" 
           btnText="Hud och nagelbilder"
@@ -119,7 +107,7 @@ class HomeScreen extends React.Component {
           <View style={{flexDirection:'row', paddingTop: 30, justifyContent: 'space-around' }}>
 
           <RNEButton          
-          color='#B14AED'
+          color='#FF007F'
           iconName="user-md" 
           iconType="font-awesome" 
           btnText="Läkarbesök"

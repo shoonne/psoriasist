@@ -4,7 +4,7 @@ const { width: winWidth, height: winHeight } = Dimensions.get('window');
 
 export default StyleSheet.create({
     preview: {
-        height: winHeight,
+        height: winHeight * 0.6,
         width: winWidth,
         position: 'absolute',
         left: 0,
@@ -17,12 +17,13 @@ export default StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
+        flexDirection: 'row',
     },
     bottomToolbar: {
         width: winWidth,
         position: 'absolute',
         height: 100,
-        bottom: 0,
+        bottom: 250,
     },
     captureBtn: {
         width: 60,

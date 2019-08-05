@@ -1,6 +1,6 @@
 // src/toolbar.component.js file
 import React from 'react';
-import { Camera } from 'expo';
+import { Camera } from 'expo-camera';
 import { Ionicons } from '@expo/vector-icons';
 import { Col, Row, Grid } from "react-native-easy-grid";
 import { View, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
@@ -14,16 +14,24 @@ export default ({
     cameraType = CameraTypes.back, 
     flashMode = CameraFlashModes.off, 
     setFlashMode, setCameraType, 
-    onCaptureIn, onCaptureOut, onLongCapture, onShortCapture,  
+    onCaptureIn, onCaptureOut, onLongCapture, onShortCapture,openGallery  
 }) => (
     <Grid style={styles.bottomToolbar}>
         <Row>
             <Col style={styles.alignCenter}>
-                <TouchableOpacity onPress={() => setFlashMode( 
+                <TouchableOpacity style={{marginLeft: 20}} onPress={() => setFlashMode( 
                     flashMode === CameraFlashModes.on ? CameraFlashModes.off : CameraFlashModes.on 
                 )}>
                     <Ionicons
                         name={flashMode == CameraFlashModes.on ? "md-flash" : 'md-flash-off'}
+                        color="white"
+                        size={30}
+                    />
+                </TouchableOpacity>
+
+                <TouchableOpacity style={{paddingLeft:40}} onPress={openGallery}>
+                    <Ionicons
+                        name={'ios-photos'}
                         color="white"
                         size={30}
                     />
