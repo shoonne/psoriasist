@@ -31,15 +31,18 @@ export default class DoctorVisitStartScreen extends Component {
     return (
       <View style={{alignItems:'center'}}>
       <ScrollView showsVerticalScrollIndicator={false}>
-      <TouchableOpacity style={[styles.button, {backgroundColor:'#2E1F5E'}]}>
+
+      <TouchableOpacity 
+      onPress={() => {this.props.navigation.navigate('DoctorNoteTest')}} 
+      style={[styles.button, {backgroundColor:'#C5D86D'}]}>
       <Icon
-      containerStyle={{paddingLeft: 20}}
+        containerStyle={{paddingLeft: 20}}
         raised
-        name='check'
+        name='pencil'
         type='font-awesome'
-        color='#2E1F5E'
-        onPress={() => console.log('hello')} />
-          <Text style={{color:'white', paddingLeft: 10}}>Checklista</Text>
+        color='#C5D86D'
+        />
+          <Text style={{color:'white', paddingLeft: 10}}>Anteckingar</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={[styles.button, {backgroundColor:'#F46036'}]}>
@@ -53,7 +56,7 @@ export default class DoctorVisitStartScreen extends Component {
           <Text style={{color:'white', paddingLeft: 10}} >Mina frågor</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={[styles.button, {backgroundColor:'#1B998B'}]}>
+      <TouchableOpacity onPress={() => {this.props.navigation.navigate('DoctorAppointment')}} style={[styles.button, {backgroundColor:'#1B998B'}]}>
       <Icon
         containerStyle={{paddingLeft: 20}}
         raised
@@ -75,18 +78,17 @@ export default class DoctorVisitStartScreen extends Component {
           <Text style={{color:'white', paddingLeft: 10}}>Online läkare</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity 
-      onPress={() => {this.props.navigation.navigate('DoctorNoteTest')}} 
-      style={[styles.button, {backgroundColor:'#C5D86D'}]}>
+      <TouchableOpacity style={[styles.button, {backgroundColor:'#2E1F5E'}]}>
       <Icon
-        containerStyle={{paddingLeft: 20}}
+      containerStyle={{paddingLeft: 20}}
         raised
-        name='pencil'
+        name='check'
         type='font-awesome'
-        color='#C5D86D'
-        />
-          <Text style={{color:'white', paddingLeft: 10}}>Anteckingar</Text>
+        color='#2E1F5E'
+        onPress={() => console.log('hello')} />
+          <Text style={{color:'white', paddingLeft: 10}}>Checklista</Text>
       </TouchableOpacity>
+
       </ScrollView>
 
       </View>

@@ -11,6 +11,7 @@ import DoctorNoteTest from './components/src/screens/DoctorNotes';
 import DoctorVisitStartScreen from './components/src/screens/DoctorVisitStartScreen';
 import MyCarousell from './components/src/common/MyCarousell';
 import CameraPage from './components/src/screens/CameraPage';
+import DoctorAppointment from './components/src/screens/DoctorAppointment';
 
 
 // Navigation
@@ -30,7 +31,6 @@ const store = createStore(firstReducer);
 // let deviceHeight = Dimensions.get('window').height;
 // const isAndroid = Platform.OS == "android";
 
-const bg = 'https://dummyimage.com/640x360/fff/aaa';
 const bg2 = require('./assets/background/startscreenred.png')
 
 
@@ -136,7 +136,9 @@ const RootStack = createStackNavigator(
     
     SkinAndNailSelfie: CameraPage,
     
-    Psoriasis: Psoriasis
+    Psoriasis: Psoriasis,
+
+    DoctorAppointment: DoctorAppointment,
     
   },
   {

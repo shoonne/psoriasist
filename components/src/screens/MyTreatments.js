@@ -16,6 +16,7 @@ import {
 import AnimatedHeader from 'react-native-animated-header';
 import RNEButton from '../common/buttons/IconBtn';
 import RoundedBtn from '../common/buttons/RoundedBtn';
+import MedicinCard from '../common/Medicincard';
 
 const bg2 = require('../../../assets/background/pills.png');
 const isAndroid = Platform.OS == "android";
@@ -95,6 +96,25 @@ class MyTreatments extends Component {
         )
     }
 
+    onLongPressCard = (i) => {
+      Alert.alert(
+       'Alert Title',
+       'My Alert Msg',
+       [
+         {text: 'Delete', onPress: () => this.deleteTask(i)},
+         {
+           text: 'Cancel',
+           onPress: () => console.log('Cancel Pressed'),
+           style: 'cancel',
+         },
+         {text: 'OK', onPress: () => console.log('OK Pressed')},
+       ],
+       {cancelable: false},
+     )
+   }
+
+    
+
     componentDidMount() {
         Keyboard.addListener(
             isAndroid ? "keyboardDidShow" : "keyboardWillShow",
@@ -107,7 +127,7 @@ class MyTreatments extends Component {
 
     render(){
       const {container, animatedHeader, list, modal, shadow, inputText, addNewMedicinBtn} = styles;
-      const {tasks, modalVisible, text, description} = this.state; 
+      const {tasks, modalVisible, text, description, descriptions} = this.state; 
 
         return (
             <View
@@ -123,12 +143,10 @@ class MyTreatments extends Component {
             data={tasks}
             keyExtractor = { (item, index) => index.toString() }
             renderItem={({ item, index }) => 
-
-            // DESIGN CARD 
-            <TouchableOpacity style={{ width: deviceWidth * 0.9, height: 150, backgroundColor:'red', marginBottom: 10}}>
-            <Text>{item.text}</Text>
-            </TouchableOpacity>
-                }
+            <MedicinCard
+            onLongPress={this.onLongPressCard}
+            text={item.text}
+            description={descriptions[index] ? descriptions[index].description : 'No description'} />}
             />
             
               </AnimatedHeader>
