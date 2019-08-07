@@ -9,20 +9,18 @@ import {
   Modal,
   Alert,
   TextInput,
-  Text,
-  TouchableOpacity
 } from 'react-native';
 
 import AnimatedHeader from 'react-native-animated-header';
 import RNEButton from '../common/buttons/IconBtn';
 import RoundedBtn from '../common/buttons/RoundedBtn';
 import MedicinCard from '../common/Medicincard';
+import {APP_COLOR, PLACEHOLDER} from '../../../utils/Colors';
 
 const bg2 = require('../../../assets/background/pills.png');
 const isAndroid = Platform.OS == "android";
 const viewPadding = 0;
 let deviceWidth = Dimensions.get('window').width;
-const APP_COLOR = '#EF2D56';
 
 
 class MyTreatments extends Component {
@@ -30,7 +28,7 @@ class MyTreatments extends Component {
     headerTintColor: 'white',
     title: 'Min behandling',
     headerStyle: {
-      backgroundColor: '#EF2D56' ,
+      backgroundColor: APP_COLOR ,
       borderBottomWidth: 0,
     },
     headerTitleStyle: {
@@ -46,6 +44,10 @@ class MyTreatments extends Component {
         addMedecin: false,
         modalVisible:false,
     };
+
+    setModalVisible(visible){
+      this.setState({modalVisible: visible});
+    }
 
     changeTextHandler = text => {
         this.setState({
@@ -74,15 +76,10 @@ class MyTreatments extends Component {
                         modalVisible: !modalVisible
                     };
                 },
-                () => Tasks.save(this.state.tasks, this.state.descriptions)
+                () => TextConfig.save(this.state.tasks, this.state.descriptions)
             );
         }
     };
-
-    setModalVisible(visible) {
-      this.setState({modalVisible: visible});
-    }
-
 
     deleteTask = i => {
         this.setState( prevState => {
@@ -92,7 +89,7 @@ class MyTreatments extends Component {
             descriptions.splice(i,1)
             return { tasks: tasks, descriptions: descriptions };
         },
-        () => Tasks.save(this.state.tasks, this.state.descriptions)
+        () => TextConfig.save(this.state.tasks, this.state.descriptions)
         )
     }
 
@@ -113,16 +110,14 @@ class MyTreatments extends Component {
      )
    }
 
-    
-
     componentDidMount() {
         Keyboard.addListener(
             isAndroid ? "keyboardDidShow" : "keyboardWillShow",
             () => this.setState({ viewPadding: viewPadding})
         );
 
-        Tasks.all(tasks => this.setState({tasks: tasks}))
-        Tasks.allTwo(descriptions => this.setState({descriptions:descriptions}))
+        TextConfig.all(tasks => this.setState({tasks: tasks}))
+        TextConfig.allTwo(descriptions => this.setState({descriptions:descriptions}))
     }
 
     render(){
@@ -165,9 +160,9 @@ class MyTreatments extends Component {
                   onChangeText={this.changeTextHandler}
                   onSubmitEditing={this.addTask}
                   style={inputText}
-                    value={text}
-                    placeholder={"Namn"}
-                    placeholderTextColor={'#DDDDDD'}
+                  value={text}
+                  placeholder={"Namn"}
+                  placeholderTextColor={PLACEHOLDER}
                   />
 
                   <TextInput
@@ -175,14 +170,14 @@ class MyTreatments extends Component {
                   style={inputText}
                   value={description}
                   placeholder={"Beskrivning"}
-                  placeholderTextColor={'#DDDDDD'}
+                  placeholderTextColor={PLACEHOLDER}
                   />
 
                   <TextInput
                   style={inputText}
                   value={text}
                   placeholder={"Frekvens"}
-                  placeholderTextColor={'#DDDDDD'}
+                  placeholderTextColor={PLACEHOLDER}
                   />
                 </View>
 
@@ -202,9 +197,13 @@ class MyTreatments extends Component {
              </Modal>
 
              <View style={addNewMedicinBtn}>
-                <RNEButton 
-                onPress={() => {this.setModalVisible(true)}} 
-                size={25} height={80} color={APP_COLOR} iconName='plus' iconType='font-awesome'/>
+             <RoundedBtn 
+                text={"LÄGG TILL"}
+                textColor={"white"}
+                onPress={this.addTask}
+                style={{marginTop: 50, backgroundColor: APP_COLOR}}
+                onPress={() => {this.setModalVisible(true)}}
+                />
              </View>
 
           </View>
@@ -216,7 +215,7 @@ class MyTreatments extends Component {
 
 
 
-let Tasks = {
+let TextConfig = {
     convertToArrayOfObject(tasks, callback) {
       return callback(
         tasks ? tasks.split("||").map((task, i) => ({ key: i, text: task })) : []
@@ -280,13 +279,13 @@ const styles = {
       width: 50,
       borderRadius: 200,
       position: 'absolute',
-      bottom: 20,
+      bottom: 80,
       justifyContent: 'center',
       alignItems: 'center',
     },
     // TEXTINPUT
     inputText: {
-      fontSize: 20,borderBottomWidth:0.6, borderBottomColor:'#DDDDDD', width: '90%'
+      fontSize: 20,borderBottomWidth:0.6, borderBottomColor:PLACEHOLDER, width: '90%'
     },
     shadow: {
         borderRadius: 40,

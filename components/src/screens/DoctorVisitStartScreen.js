@@ -1,13 +1,10 @@
 
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, Dimensions, ScrollView , Button} from 'react-native';
-import { Icon } from 'react-native-elements'
+import { View, TouchableOpacity, Dimensions, ScrollView} from 'react-native';
 import { APP_COLOR } from '../../../utils/Colors';
-
-
+import RNEIcon from './../common/buttons/RNEIcon';
 
 let deviceWidth = Dimensions.get('window').width;
-
 
 export default class DoctorVisitStartScreen extends Component {
   static navigationOptions = {
@@ -19,8 +16,8 @@ export default class DoctorVisitStartScreen extends Component {
     headerTitleStyle: {
       color:'white',
     },
-
   };
+  
   constructor(props) {
     super(props);
     this.state = {
@@ -35,62 +32,26 @@ export default class DoctorVisitStartScreen extends Component {
       <TouchableOpacity 
       onPress={() => {this.props.navigation.navigate('DoctorNoteTest')}} 
       style={[styles.button, {backgroundColor:'#C5D86D'}]}>
-      <Icon
-        containerStyle={{paddingLeft: 20}}
-        raised
-        name='pencil'
-        type='font-awesome'
-        color='#C5D86D'
-        />
-          <Text style={{color:'white', paddingLeft: 10}}>Anteckingar</Text>
+       <RNEIcon name={"pencil"} color={"#C5D86D"} iconText={"Anteckingar"}/>
       </TouchableOpacity>
 
       <TouchableOpacity style={[styles.button, {backgroundColor:'#F46036'}]}>
-      <Icon
-        containerStyle={{paddingLeft: 20}}
-        raised
-        name='comments'
-        type='font-awesome'
-        color='#F46036'
-        onPress={() => console.log('hello')} />
-          <Text style={{color:'white', paddingLeft: 10}} >Mina frågor</Text>
+       <RNEIcon name={"comments"} color={"#F46036"} iconText={"Mina frågor"}/>
       </TouchableOpacity>
 
       <TouchableOpacity onPress={() => {this.props.navigation.navigate('DoctorAppointment')}} style={[styles.button, {backgroundColor:'#1B998B'}]}>
-      <Icon
-        containerStyle={{paddingLeft: 20}}
-        raised
-        name='user-md'
-        type='font-awesome'
-        color='#1B998B'
-        onPress={() => console.log('hello')} />
-          <Text style={{color:'white', paddingLeft: 10}}>Mitt nästa läkarbesök</Text>
+        <RNEIcon name={"user-md"} color={"#1B998B"} iconText={"Mitt nästa läkarbesök"}/>
       </TouchableOpacity>
 
       <TouchableOpacity style={[styles.button, {backgroundColor:'#E71D36'}]}>
-      <Icon
-        containerStyle={{paddingLeft: 20}}
-        raised
-        name='globe'
-        type='font-awesome'
-        color='#E71D36'
-        onPress={() => console.log('hello')} />
-          <Text style={{color:'white', paddingLeft: 10}}>Online läkare</Text>
+        <RNEIcon name={"globe"} color={"#E71D36"} iconText={"Online läkare"}/>
       </TouchableOpacity>
 
       <TouchableOpacity style={[styles.button, {backgroundColor:'#2E1F5E'}]}>
-      <Icon
-      containerStyle={{paddingLeft: 20}}
-        raised
-        name='check'
-        type='font-awesome'
-        color='#2E1F5E'
-        onPress={() => console.log('hello')} />
-          <Text style={{color:'white', paddingLeft: 10}}>Checklista</Text>
+       <RNEIcon name={"check"} color={"#2E1F5E"} iconText={"Checklista"}/>
       </TouchableOpacity>
 
       </ScrollView>
-
       </View>
     );
   }
@@ -106,9 +67,7 @@ const styles = {
         shadowRadius: 1, //IOS
         elevation: 2, // Android
         height: 120,
-        width: deviceWidth * 0.9,
-        // justifyContent: 'center',
-        
+        width: deviceWidth * 0.9,        
         alignItems: 'center',
         flexDirection: 'row',
         marginBottom:20,
