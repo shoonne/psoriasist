@@ -18,6 +18,7 @@ export default class ImageBrowser extends Component {
   render() {
 
     let images = this.props.images.map((image, i) => {
+      //console.log(image.imageUri)
         return (
         <TouchableOpacity onPress={() => this.setModalVisible(true, image.imageUri)} key={i}>
         <View style={styles.imageWrap}>

@@ -178,7 +178,6 @@ let Notes = {
       );
     },
 
-
     all(callback) {
       return AsyncStorage.getItem("NOTES", (err, notes) =>
         this.convertToArrayOfObject(notes, callback)

@@ -158,7 +158,6 @@ class MyTreatments extends Component {
                 <View style={shadow}>
                   <TextInput
                   onChangeText={this.changeTextHandler}
-                  onSubmitEditing={this.addTask}
                   style={inputText}
                   value={text}
                   placeholder={"Namn"}

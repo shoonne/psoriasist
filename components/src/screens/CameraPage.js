@@ -17,11 +17,8 @@ import CameraCarousell from '../common/CameraCarousell';
 import ImageBrowser from '../common/ImageBrowser';
 import { ScrollView } from 'react-native-gesture-handler';
 
-
-
 let deviceHeight = Dimensions.get('window').height;
 let devicewidth = Dimensions.get('window').width;
-
 
 
 // TODO: CREATE STYLING FOR CAMERA AND LOOK FOR WAYS TO DISPLAY IMAGES 
@@ -29,22 +26,18 @@ export default class CameraPage extends React.Component {
     static navigationOptions = ({ navigation }) => {
         return {
             headerTintColor: 'white',
-        title: 'Kamera',
-        headerStyle: {
-        backgroundColor: '#ef2d56' ,
+            title: 'Kamera',
+            headerStyle: {
+            backgroundColor: '#ef2d56' ,
         },
-        headerTitleStyle: {
-          color:'white',
-        },
+            headerTitleStyle: {
+            color:'white',
+            },
         }
-        }
-        
-      
-
+    }
     camera = null;
     constructor(props) {
       super(props)
-    
       this.state = {
         captures: [],
         // setting flash to be turned off by default
@@ -56,18 +49,17 @@ export default class CameraPage extends React.Component {
         modalVisible: false,
 
       };
-
       this.renderImages = this.renderImages.bind(this);
     };
-
 
     setFlashMode = (flashMode) => this.setState({ flashMode });
     setCameraType = (cameraType) => this.setState({ cameraType });
     handleCaptureIn = () => this.setState({ capturing: true });
 
     handleCaptureOut = () => {
-        if (this.state.capturing)
+        if (this.state.capturing){
             this.camera.stopRecording();
+        }
     };
 
     // DELETE ALL DATA IN ASYNCSTORAGE
@@ -146,7 +138,7 @@ export default class CameraPage extends React.Component {
                         flashMode={flashMode}
                         style={styles.preview}
                         ref={camera => this.camera = camera}
-                    />
+                        />
                 </View>
                 
                 <Toolbar 
@@ -178,8 +170,9 @@ export default class CameraPage extends React.Component {
                     Alert.alert('Modal has been closed.');
                 }}>
                 <View style={{flex: 1, justifyContent:'center', alignItems:'center'}}>
+                   
                     <ScrollView>
-                    <ImageBrowser images={this.state.captures}/>
+                     <ImageBrowser images={this.state.captures}/>
                     </ScrollView>
 
                     <TouchableHighlight
