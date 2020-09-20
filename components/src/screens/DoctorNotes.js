@@ -1,194 +1,202 @@
-import React from 'react';
-import { 
-    View,
-    Platform,
-    Keyboard, 
-    AsyncStorage,
-    Dimensions,
-    Text,
-    Alert,
-    FlatList,
-    TouchableOpacity
-} from 'react-native';
-import { TextInput} from 'react-native-gesture-handler';
-import IconBtn from '../common/buttons/IconBtn';
-
+import React from "react";
+import {
+  View,
+  Platform,
+  Keyboard,
+  AsyncStorage,
+  Dimensions,
+  Text,
+  Alert,
+  FlatList,
+  TouchableOpacity,
+  TextInput,
+} from "react-native";
+import IconBtn from "../common/buttons/IconBtn";
 
 const isAndroid = Platform.OS == "android";
 const viewPadding = 0;
-let deviceWidth = Dimensions.get('window').width;
+let deviceWidth = Dimensions.get("window").width;
 
 export default class DoctorNotesTest extends React.Component {
   static navigationOptions = {
-    headerTintColor: 'white',
-    title: 'Läkarbesök',
+    headerTintColor: "white",
+    title: "Läkarbesök",
     headerStyle: {
       //backgroundColor: '#EF2D56' ,
     },
     headerTitleStyle: {
-      color:'white',
+      color: "white",
     },
   };
-    constructor(props) {
-      super(props)
-    
-      this.state = {
-          notes : [],
-          text: "",
-          viewPadding:0
-      };
+  constructor(props) {
+    super(props);
 
-      this.changeTextHandler = this.changeTextHandler.bind(this);
-   
-
+    this.state = {
+      notes: [],
+      text: "",
+      viewPadding: 0,
     };
 
-    // This runs when the text changes
-    changeTextHandler = text => {
-        this.setState({
-            text: text
-        });
-    };
+    this.changeTextHandler = this.changeTextHandler.bind(this);
+  }
 
-    addNote = () => {
-        let notEmpty = this.state.text.trim().length > 0;
+  // This runs when the text changes
+  changeTextHandler = (text) => {
+    this.setState({
+      text: text,
+    });
+  };
 
-        if(notEmpty){
-            this.setState( 
-                prevState => {
-                    let {notes, text} = prevState;
+  addNote = () => {
+    let notEmpty = this.state.text.trim().length > 0;
 
-                    return {
-                        notes: notes.concat({key: notes.length, text: text}),
-                        text: "",
-                    };
-                },
-                () => Notes.save(this.state.notes)
-            );
-        }
-    };
+    if (notEmpty) {
+      this.setState(
+        (prevState) => {
+          let { notes, text } = prevState;
 
-
-    deleteNote = i => {
-        this.setState( prevState => {
-            let notes = prevState.notes.slice();
-            notes.splice(i , 1);
-            return { notes: notes };
+          return {
+            notes: notes.concat({ key: notes.length, text: text }),
+            text: "",
+          };
         },
-        () => Notes.save(this.state.notes))
-    }
-
-    onLongPressCard = (i) => {
-       Alert.alert(
-        'Alert Title',
-        'My Alert Msg',
-        [
-          {text: 'Delete', onPress: () => this.deleteNote(i)},
-          {
-            text: 'Cancel',
-            onPress: () => console.log('Cancel Pressed'),
-            style: 'cancel',
-          },
-          {text: 'OK', onPress: () => console.log('OK Pressed')},
-        ],
-        {cancelable: false},
-      )
-    }
-
-    componentDidMount() {
-      Keyboard.addListener(
-          isAndroid ? "keyboardDidShow" : "keyboardWillShow",
-          () => this.setState({ viewPadding: viewPadding})
+        () => Notes.save(this.state.notes)
       );
-
-      Notes.all(notes => this.setState({notes: notes}))
-    } 
-
-    renderNotes() {
-      this.state.notes.map((note) => {
-        return (<Text>hej</Text>)
-      })
     }
-    
-    render(){
-              {/* TODO: STYLE THE NOTES AND THE TEXTINPUT */}
+  };
 
-        return (
-          <View>
+  deleteNote = (i) => {
+    this.setState(
+      (prevState) => {
+        let notes = prevState.notes.slice();
+        notes.splice(i, 1);
+        return { notes: notes };
+      },
+      () => Notes.save(this.state.notes)
+    );
+  };
 
-          <View style={{alignItems:'center', marginTop: 20}}>
-            <TextInput 
+  onLongPressCard = (i) => {
+    Alert.alert(
+      "Alert Title",
+      "My Alert Msg",
+      [
+        { text: "Delete", onPress: () => this.deleteNote(i) },
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel",
+        },
+        { text: "OK", onPress: () => console.log("OK Pressed") },
+      ],
+      { cancelable: false }
+    );
+  };
+
+  componentDidMount() {
+    Keyboard.addListener(
+      isAndroid ? "keyboardDidShow" : "keyboardWillShow",
+      () => this.setState({ viewPadding: viewPadding })
+    );
+
+    Notes.all((notes) => this.setState({ notes: notes }));
+  }
+
+  renderNotes() {
+    this.state.notes.map((note) => {
+      return <Text>hej</Text>;
+    });
+  }
+
+  render() {
+    {
+      /* TODO: STYLE THE NOTES AND THE TEXTINPUT */
+    }
+
+    return (
+      <View>
+        <View style={{ alignItems: "center", marginTop: 20 }}>
+          <TextInput
             placeholder="Skriv ner anteckingar"
-              multiline={true}
-              value={this.state.text}
-              onChangeText={this.changeTextHandler}
-              style={{ borderBottomWidth:0.5, maxHeight: 150, width: deviceWidth*0.9, paddingLeft: 10, marginTop: 10}}/>
-
-              <IconBtn
-                color='#EF2D56'
-                size={20}
-                iconName="plus" 
-                iconType="font-awesome" 
-                btnText="Lägg till"
-                onPress={this.addNote}
-            />
-          </View>
-
-          <View>
-          <FlatList
-          data={this.state.notes}
-          keyExtractor = { (item, index) => index.toString()}
-          renderItem={({item, index}) => (
-            <View style={{alignItems:'center'}}>
-            <TouchableOpacity onLongPress={() => this.onLongPressCard(index)} style={[styles.button, {backgroundColor:'#f2eecb'}]}>
-            <Text style={{color:'#3e3e3c', padding: 10}}>{item.text}</Text>
-            </TouchableOpacity>
-            </View>
-
-          )}
-              
+            multiline={true}
+            value={this.state.text}
+            onChangeText={this.changeTextHandler}
+            style={{
+              borderBottomWidth: 0.5,
+              maxHeight: 150,
+              width: deviceWidth * 0.9,
+              paddingLeft: 10,
+              marginTop: 10,
+            }}
           />
-          </View>
 
-          </View>
-        )
-    }
+          <IconBtn
+            color="#EF2D56"
+            size={20}
+            iconName="plus"
+            iconType="font-awesome"
+            btnText="Lägg till"
+            onPress={this.addNote}
+          />
+        </View>
+
+        <View>
+          <FlatList
+            data={this.state.notes}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({ item, index }) => (
+              <View style={{ alignItems: "center" }}>
+                <TouchableOpacity
+                  onLongPress={() => this.onLongPressCard(index)}
+                  style={[styles.button, { backgroundColor: "#f2eecb" }]}
+                >
+                  <Text style={{ color: "#3e3e3c", padding: 10 }}>
+                    {item.text}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            )}
+          />
+        </View>
+      </View>
+    );
+  }
 }
 const styles = {
   button: {
-   flexWrap: "wrap",
+    flexWrap: "wrap",
     borderRadius: 10,
     marginTop: 10,
-    shadowColor: 'rgba(0,0,0, .4)', // IOS
+    shadowColor: "rgba(0,0,0, .4)", // IOS
     shadowOffset: { height: 1, width: 1 }, // IOS
     shadowOpacity: 1, // IOS
     shadowRadius: 1, //IOS
     elevation: 2, // Android
     width: deviceWidth * 0.9,
     // justifyContent: 'center',
-   // flexDirection: 'row',
-    marginBottom:20,
-}
-}
+    // flexDirection: 'row',
+    marginBottom: 20,
+  },
+};
 
 let Notes = {
-    convertToArrayOfObject(notes, callback) {
-      return callback(
-        notes ? notes.split("||").map((note, i) => ({ key: i, text: note })) : []
-      );
-    },
+  convertToArrayOfObject(notes, callback) {
+    return callback(
+      notes ? notes.split("||").map((note, i) => ({ key: i, text: note })) : []
+    );
+  },
 
-    all(callback) {
-      return AsyncStorage.getItem("NOTES", (err, notes) =>
-        this.convertToArrayOfObject(notes, callback)
-      );
-    },
-    
-    convertToStringWithSeparators(notes) {
-      return notes.map(note => note.text).join("||");
-    },
+  all(callback) {
+    return AsyncStorage.getItem("NOTES", (err, notes) =>
+      this.convertToArrayOfObject(notes, callback)
+    );
+  },
 
-    save(notes) {
-        AsyncStorage.setItem("NOTES", this.convertToStringWithSeparators(notes));
-    }
-  };
+  convertToStringWithSeparators(notes) {
+    return notes.map((note) => note.text).join("||");
+  },
+
+  save(notes) {
+    AsyncStorage.setItem("NOTES", this.convertToStringWithSeparators(notes));
+  },
+};
